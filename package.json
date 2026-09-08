@@ -4,19 +4,32 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "test": "mocha tests/**",
-    "lint": "npm run lint:filenames && npm run lint:files",
-    "lint:files": "oxfmt --check",
-    "lint:files:fix": "oxfmt",
-    "lint:filenames": "ls-lint"
-  },
-  "dependencies": {
-    "@ls-lint/ls-lint": "^2.3.1"
+    "test": "mocha",
+    "lint": "npm run lint:filenames && npm run lint:dependencies && npm run lint:format && npm run lint:files:js",
+    "lint:fix": "npm run lint:format:fix && npm run lint:files:js:fix",
+    "lint:format": "oxfmt --check",
+    "lint:format:fix": "oxfmt",
+    "lint:files:js": "eslint .",
+    "lint:files:js:fix": "eslint --fix .",
+    "lint:filenames": "ls-lint",
+    "lint:dependencies": "knip --no-progress"
   },
   "devDependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.8.0",
+    "@eslint/js": "^10.0.1",
+    "@eslint/json": "^2.1.0",
+    "@ls-lint/ls-lint": "^2.3.1",
+    "@types/node": "^26.5.0",
     "chai": "^6.2.2",
+    "eslint": "^10.10.0",
+    "eslint-plugin-chai-expect": "^4.1.0",
+    "eslint-plugin-mocha": "^12.0.2",
+    "eslint-plugin-simple-import-sort": "^14.0.0",
+    "eslint-plugin-yml": "^3.8.1",
+    "knip": "^6.34.0",
     "mocha": "^12.0.0",
-    "oxfmt": "^0.67.0"
+    "oxfmt": "^0.67.0",
+    "typescript": "^7.0.2"
   },
   "engines": {
     "node": "^26.8.1"
