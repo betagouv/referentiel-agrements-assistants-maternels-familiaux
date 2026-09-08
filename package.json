@@ -1,0 +1,17 @@
+{
+  "engines": {
+    "node": "^26.8.1"
+  },
+  "license": "Apache-2.0",
+  "name": "referentiel-national-agrements",
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "npm run lint:filenames",
+    "lint:filenames": "ls-lint"
+  },
+  "type": "module",
+  "version": "0.0.0",
+  "dependencies": {
+    "@ls-lint/ls-lint": "^2.3.1"
+  }
+}
