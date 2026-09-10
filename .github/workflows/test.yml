@@ -1,0 +1,22 @@
+# https://docs.github.com/en/actions/tutorials/build-and-test-code/nodejs
+name: test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+      - name: install node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '26.8.1'
+      - name: install dependencies
+        run: npm ci
+      - name: lint
+        run: npm run lint
+      - name: test
+        run: npm run test

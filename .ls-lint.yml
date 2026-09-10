@@ -1,12 +1,14 @@
 ls:
   .js: kebab-case
   .json: kebab-case
-  .dir: kebab-case
   .md: kebab-case
   .yml: kebab-case
 
+  .dir: kebab-case
+
 ignore:
   - .git
+  - .github
   - node_modules
   - .idea
   - README.md
