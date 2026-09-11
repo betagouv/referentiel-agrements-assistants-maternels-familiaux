@@ -16,7 +16,8 @@
     "start": "node serve.js"
   },
   "dependencies": {
-    "@hapi/hapi": "^21.4.10"
+    "@hapi/hapi": "^21.4.10",
+    "joi": "^18.2.8"
   },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.0",
@@ -28,6 +29,7 @@
     "eslint": "^10.10.0",
     "eslint-plugin-chai-expect": "^4.1.0",
     "eslint-plugin-mocha": "^12.0.2",
+    "eslint-plugin-n": "^18.3.0",
     "eslint-plugin-node-security": "^5.5.0",
     "eslint-plugin-simple-import-sort": "^14.0.0",
     "eslint-plugin-yml": "^3.8.1",
