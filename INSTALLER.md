@@ -26,6 +26,11 @@ Installer les dépendances.
 npm install
 ```
 
+Initialiser la configuration
+```shell
+cp .envrc.sample .envrc
+```
+
 Exécuter les tests.
 ```shell
 npm run test

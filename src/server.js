@@ -1,18 +1,24 @@
 import Hapi from '@hapi/hapi';
 
+import packageJSON from '../package.json' with { type: 'json' };
+import { configuration } from './configuration.js';
+
 const createServer = async () => {
   const server = new Hapi.server({
-    port: 3000,
+    port: configuration.apiListeningPort,
   });
 
   server.route([
     {
       method: 'GET',
-      path: '/api/healthcheck',
+      path: '/api',
       config: {
         auth: false,
-        handler: (request, h) => {
-          return h.response().code(200);
+        handler: () => {
+          return {
+            name: packageJSON.name,
+            version: packageJSON.version,
+          };
         },
       },
     },
