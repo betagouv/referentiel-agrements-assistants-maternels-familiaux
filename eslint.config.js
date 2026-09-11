@@ -4,8 +4,9 @@ import commentsPlugin from '@eslint-community/eslint-plugin-eslint-comments/conf
 import { defineConfig, globalIgnores } from 'eslint/config';
 import chaiExpectPlugin from 'eslint-plugin-chai-expect';
 import mochaPlugin from 'eslint-plugin-mocha';
+import nodeSecurityPlugin from 'eslint-plugin-node-security';
 import simpleImportPlugin from 'eslint-plugin-simple-import-sort';
-import eslintPluginYml from 'eslint-plugin-yml';
+import ymlPlugin from 'eslint-plugin-yml';
 
 export default defineConfig([
   { linterOptions: { reportUnusedDisableDirectives: 'error' } },
@@ -25,7 +26,7 @@ export default defineConfig([
     },
   },
   { files: ['**/*.json'], plugins: { json }, language: 'json/json', extends: ['json/recommended'] },
-  ...eslintPluginYml.configs.recommended,
+  ...ymlPlugin.configs.recommended,
   {
     ...mochaPlugin.configs.recommended,
     files: ['tests/**/*.js'],
@@ -36,5 +37,6 @@ export default defineConfig([
     },
   },
   chaiExpectPlugin.configs['recommended-flat'],
+  nodeSecurityPlugin.configs.strict,
   globalIgnores(['package-lock.json']),
 ]);

@@ -27,9 +27,10 @@ La modification :
 - suit les règles de lint [(configuration)](eslint.config.js);
 
 Les règles de lint suivent le set `recommended`, et quelques règles supplémentaires :
-- [code Js](https://eslint.org/docs/latest/rules/)
-- [ordre des imports](https://github.com/lydell/eslint-plugin-simple-import-sort/)
-- [commentaires de linter](https://eslint-community.github.io/eslint-plugin-eslint-comments/rules)
-- [test runner](https://github.com/lo1tuma/eslint-plugin-mocha#rules) ;
-- [test assertion](https://github.com/Turbo87/eslint-plugin-chai-expect#rules) .
-- [code Yaml](https://ota-meshi.github.io/eslint-plugin-yml/rules/)
+- [code Js](https://eslint.org/docs/latest/rules/) ;
+- [ordre des imports](https://github.com/lydell/eslint-plugin-simple-import-sort/) ;
+- [commentaires de linter](https://eslint-community.github.io/eslint-plugin-eslint-comments/rules) ;
+- [runner de test](https://github.com/lo1tuma/eslint-plugin-mocha#rules) ;
+- [assertion de test](https://github.com/Turbo87/eslint-plugin-chai-expect#rules) ;
+- [sécurité Node](https://eslint.interlace.tools/docs/security/plugin-node-security/) - set `strict`;
+- [code Yaml](https://ota-meshi.github.io/eslint-plugin-yml/rules/).
