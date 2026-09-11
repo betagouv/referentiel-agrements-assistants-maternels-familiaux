@@ -24,6 +24,7 @@
     "eslint": "^10.10.0",
     "eslint-plugin-chai-expect": "^4.1.0",
     "eslint-plugin-mocha": "^12.0.2",
+    "eslint-plugin-node-security": "^5.5.0",
     "eslint-plugin-simple-import-sort": "^14.0.0",
     "eslint-plugin-yml": "^3.8.1",
     "knip": "^6.34.0",
