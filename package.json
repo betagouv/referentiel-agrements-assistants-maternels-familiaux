@@ -12,7 +12,11 @@
     "lint:files:js": "eslint .",
     "lint:files:js:fix": "eslint --fix .",
     "lint:filenames": "ls-lint",
-    "lint:dependencies": "knip --no-progress"
+    "lint:dependencies": "knip --no-progress",
+    "start": "node serve.js"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^21.4.10"
   },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.0",
@@ -27,6 +31,7 @@
     "eslint-plugin-node-security": "^5.5.0",
     "eslint-plugin-simple-import-sort": "^14.0.0",
     "eslint-plugin-yml": "^3.8.1",
+    "http-status-codes": "^2.3.0",
     "knip": "^6.34.0",
     "mocha": "^12.0.0",
     "oxfmt": "^0.67.0",
