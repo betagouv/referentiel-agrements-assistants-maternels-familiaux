@@ -5,7 +5,7 @@ import { createServer } from '../../src/server.js';
 
 describe('Integration | Route | api', function () {
   describe('GET /api', function () {
-    describe('when the server if properly configured', function () {
+    describe('if the server if properly configured', function () {
       it('should return OK (200)', async function () {
         // given
         const server = await createServer();
@@ -27,9 +27,27 @@ describe('Integration | Route | api', function () {
 
         // then
         const actual = JSON.parse(response.payload);
-        expect(actual).to.deep.equal({
+        expect(actual).to.include({
           name: 'referentiel-national-agrements',
           version: '0.0.0',
+        });
+      });
+    });
+    describe('if the database can be reached', function () {
+      it('should return its status as up', async function () {
+        // given
+        const server = await createServer();
+        const query = { method: 'GET', url: '/api' };
+
+        // when
+        const response = await server.inject(query);
+
+        // then
+        const actual = JSON.parse(response.payload);
+        expect(actual).to.include({
+          resources: {
+            database: 'up',
+          },
         });
       });
     });
