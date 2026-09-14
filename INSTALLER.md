@@ -26,16 +26,34 @@ Installer les dépendances.
 npm install
 ```
 
-Initialiser la configuration
+Initialiser la configuration.
 ```shell
 cp .envrc.sample .envrc
 ```
 
-Exécuter les tests.
+Démarrer la base de données.
+```shell
+docker compose up --detach --wait
+```
+
+Exécuter les tests automatisés.
 ```shell
 npm run test
+```
+
+## Démarrer l'application
+
+Démarrer la base de données.
+```shell
+docker compose up --detach --wait
+```
+
+Démarrer l'application.
+```shell
+npm start
 ```
 
 ## Développer
 
 Avant de développer, lire les règles [dans ce guide](CONTRIBUER.md)
+
