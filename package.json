@@ -17,7 +17,9 @@
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",
-    "joi": "^18.2.8"
+    "joi": "^18.2.8",
+    "knex": "^3.3.0",
+    "pg": "^8.23.0"
   },
   "devDependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.0",
