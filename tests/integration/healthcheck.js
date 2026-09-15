@@ -44,9 +44,9 @@ describe('Integration | Route | api', function () {
 
         // then
         const actual = JSON.parse(response.payload);
-        expect(actual).to.include({
+        expect(actual).to.deep.include({
           resources: {
-            database: 'up',
+            database: { status: 'up' },
           },
         });
       });
