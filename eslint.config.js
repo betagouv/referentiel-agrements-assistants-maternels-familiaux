@@ -3,6 +3,7 @@ import json from '@eslint/json';
 import commentsPlugin from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import chaiExpectPlugin from 'eslint-plugin-chai-expect';
+import knexSecurityPlugin from 'eslint-plugin-knex-security';
 import mochaPlugin from 'eslint-plugin-mocha';
 import nodePlugin from 'eslint-plugin-n';
 import nodeSecurityPlugin from 'eslint-plugin-node-security';
@@ -14,7 +15,7 @@ export default defineConfig([
   commentsPlugin.recommended,
   {
     files: ['**/*.{js,mjs}'],
-    plugins: { js, 'simple-import-sort': simpleImportPlugin, n: nodePlugin },
+    plugins: { js, 'simple-import-sort': simpleImportPlugin, n: nodePlugin, 'knex-security': knexSecurityPlugin },
     extends: ['js/recommended'],
     languageOptions: { ecmaVersion: 2026, sourceType: 'module' },
     rules: {
@@ -25,6 +26,7 @@ export default defineConfig([
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
       'n/no-process-env': 'error',
+      'knex-security/no-hardcoded-credentials': 'error',
     },
   },
   { files: ['**/*.json'], plugins: { json }, language: 'json/json', extends: ['json/recommended'] },

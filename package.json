@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "lint": "npm run lint:filenames && npm run lint:dependencies && npm run lint:format && npm run lint:files:js",
     "lint:fix": "npm run lint:format:fix && npm run lint:files:js:fix",
     "lint:format": "oxfmt --check",
@@ -30,6 +30,7 @@
     "chai": "^6.2.2",
     "eslint": "^10.10.0",
     "eslint-plugin-chai-expect": "^4.1.0",
+    "eslint-plugin-knex-security": "^0.4.8",
     "eslint-plugin-mocha": "^12.0.2",
     "eslint-plugin-n": "^18.3.0",
     "eslint-plugin-node-security": "^5.5.0",

@@ -10,6 +10,7 @@ Logiciels:
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/), version indiquée dans le fichier [.nvmrc](.nvmrc))
 - [Docker](https://docs.docker.com/get-started/)
+- [direnv](https://direnv.net/)
 
 Il est recommandé d'utiliser un gestionnaire de versions tel que [nvm](https://github.com/nvm-sh/nvm).
 
@@ -29,6 +30,11 @@ npm install
 Initialiser la configuration.
 ```shell
 cp .envrc.sample .envrc
+```
+
+Charger la configuration.
+```shell
+direnv allow
 ```
 
 Démarrer la base de données.
