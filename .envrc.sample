@@ -1,2 +1,13 @@
+# =========
+# Network
+# =========
+
 # API listening port
 export PORT=3000
+
+# =========
+# Database
+# =========
+
+ # API listening port
+ export DATABASE_USER_PASSWORD=password
