@@ -29,7 +29,7 @@ jobs:
       - name: start database
         uses: gullerya/db-setup-action@v1.1.0
         with:
-          image: 'postgres:alpine'
+          image: 'postgres:17.11-alpine'
           port: 5432
           username: postgres
           # can't pass $DATABASE_USER_PASSWORD environment variable to reusable workflow
