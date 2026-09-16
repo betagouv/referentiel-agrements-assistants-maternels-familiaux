@@ -3,10 +3,18 @@ name: test
 
 on: [push]
 
+env:
+  # https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#example-usage-of-the-vars-context
+  API_LISTENING_PORT: ${{ vars.API_LISTENING_PORT }}
+  DATABASE_USER_PASSWORD: ${{ vars.DATABASE_USER_PASSWORD }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    # https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/control-deployments#using-environments-without-deployments
+    environment:
+      name: main
+      deployment: false
     steps:
       - name: checkout
         uses: actions/checkout@v6
@@ -18,5 +26,15 @@ jobs:
         run: npm ci
       - name: lint
         run: npm run lint
-      - name: test
+      - name: start database
+        uses: gullerya/db-setup-action@v1.1.0
+        with:
+          image: 'postgres:alpine'
+          port: 5432
+          username: postgres
+          # can't pass $DATABASE_USER_PASSWORD environment variable to reusable workflow
+          # https://github.com/orgs/community/discussions/26671
+          password: password
+          database: database
+      - name: run tests
         run: npm run test
