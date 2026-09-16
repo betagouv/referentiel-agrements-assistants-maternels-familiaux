@@ -6,7 +6,7 @@ on: [push]
 env:
   # https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#example-usage-of-the-vars-context
   API_LISTENING_PORT: ${{ vars.API_LISTENING_PORT }}
-  DATABASE_USER_PASSWORD: ${{ vars.DATABASE_USER_PASSWORD }}
+  DATABASE_URL: ${{ vars.DATABASE_URL }}
 
 jobs:
   build:
