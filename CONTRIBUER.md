@@ -12,6 +12,11 @@ La modification est testée automatiquement.
 
 Elle est soumise par une Pull request, rédigée en français.
 
+La Pull request exécute automatiquement les tests automatisés (CI) avec Github Actions.
+
+La Pull request donne lieu à la création d'une review application.
+Chaque push sur la pull request redéploie les modifications, uniquement si la CI finit en succès.
+
 L'intégration des modifications (merge de la Pull Request) :
 - a pour pré-requis le passage des tests automatisés avec succès ;
 - préserve les commits (no squash).

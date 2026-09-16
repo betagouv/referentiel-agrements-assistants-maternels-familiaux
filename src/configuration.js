@@ -1,5 +1,7 @@
 import Joi from 'joi';
 
+// https://12factor.net/config
+
 const schema = Joi.object({
   apiListeningPort: Joi.number().integer().min(1).max(65535).required(),
   databaseUserPassword: Joi.string().required(),
@@ -7,8 +9,8 @@ const schema = Joi.object({
 
 /*eslint-disable no-undef,n/no-process-env*/
 const configuration = {
-  apiListeningPort: process.env.PORT || 3000,
-  databaseUserPassword: process.env.DATABASE_USER_PASSWORD || 'password',
+  apiListeningPort: process.env.API_LISTENING_PORT,
+  databaseUserPassword: process.env.DATABASE_USER_PASSWORD,
 };
 /*eslint-enable no-undef,n/no-process-env*/
 
