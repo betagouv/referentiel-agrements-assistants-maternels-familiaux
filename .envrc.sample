@@ -8,4 +8,4 @@ export API_LISTENING_PORT=3000
 # Database
 # =========
 
- export DATABASE_USER_PASSWORD=password
+export DATABASE_URL=postgresql://postgres:password@localhost

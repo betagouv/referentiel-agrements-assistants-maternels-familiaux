@@ -4,13 +4,17 @@ import Joi from 'joi';
 
 const schema = Joi.object({
   apiListeningPort: Joi.number().integer().min(1).max(65535).required(),
-  databaseUserPassword: Joi.string().required(),
+  database: {
+    url: Joi.string().uri().required(),
+  },
 }).options({ allowUnknown: false });
 
 /*eslint-disable no-undef,n/no-process-env*/
 const configuration = {
   apiListeningPort: process.env.API_LISTENING_PORT,
-  databaseUserPassword: process.env.DATABASE_USER_PASSWORD,
+  database: {
+    url: process.env.DATABASE_URL,
+  },
 };
 /*eslint-enable no-undef,n/no-process-env*/
 

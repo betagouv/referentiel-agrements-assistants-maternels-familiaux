@@ -82,7 +82,9 @@ Ajoutez-y les variables d'environnement, voir [.envrc](.envrc.sample)
 
 Activez l'intégration SCM.
 
-Ajoutez les variables d'environnement, voir [.envrc](.envrc.sample)
+Ajoutez les variables d'environnement, voir [.envrc](.envrc.sample).
+
+Ajouter un addon PostgreSQL.
 
 Effectuez un premier déploiement.
 
@@ -91,7 +93,7 @@ Effectuez un premier déploiement.
 Activez les review application.
 
 Elles héritent automatiquement des variables d'environnement.
-L'ajout de l'addon BDD est effectué automatiquement grâce au fichier [dédié](scalingo.json).
+L'ajout de l'addon PostgreSQL est effectué automatiquement grâce au fichier [dédié](scalingo.json).
 
 > Child applications clone some information from the parent app:
 >    the container formation

@@ -6,6 +6,14 @@
       "value": "true"
     }
   },
+  "addons": [
+    {
+      "plan": "postgresql:postgresql-starter-512",
+      "options": {
+        "version": "17"
+      }
+    }
+  ],
   "formation": {
     "web": {
       "amount": 1,
