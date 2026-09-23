@@ -33,6 +33,16 @@ const createServer = async () => {
         },
       },
     },
+    {
+      method: 'GET',
+      path: '/api/error',
+      config: {
+        auth: false,
+        handler: async () => {
+          throw new Error('An error was triggered', { cause: 'observability' });
+        },
+      },
+    },
   ]);
 
   return server;
