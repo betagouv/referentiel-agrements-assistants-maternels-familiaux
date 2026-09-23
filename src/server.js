@@ -12,7 +12,7 @@ const createServer = async () => {
     port: configuration.apiListeningPort,
   });
 
-  server.route([
+  const routes = [
     {
       method: 'GET',
       path: '/api',
@@ -33,7 +33,18 @@ const createServer = async () => {
         notes: ["Cette route permet d'obtenir la version de l'application et le statut des ressources."],
       },
     },
-  ]);
+    {
+      method: 'GET',
+      path: '/api/error',
+      config: {
+        auth: false,
+        handler: async () => {
+          throw new Error('An error was triggered', { cause: 'observability' });
+        },
+      },
+    },
+  ];
+  server.route(routes);
 
   await server.register([
     hapiInert,
