@@ -13,11 +13,14 @@
     "lint:files:js:fix": "eslint --fix .",
     "lint:filenames": "ls-lint",
     "lint:dependencies": "knip --no-progress",
-    "start": "node serve.js"
+    "start": "node --no-warnings=ExperimentalWarning serve.js"
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",
-    "joi": "^18.2.8",
+    "@hapi/inert": "^7.1.2",
+    "@hapi/vision": "^7.0.3",
+    "hapi-swagger": "^17.3.2",
+    "joi": "^17.13.8",
     "knex": "^3.3.0",
     "pg": "^8.23.0"
   },
