@@ -59,6 +59,8 @@ Démarrer l'application.
 npm start
 ```
 
+Parcourir les routes disponibles [avec Swagger](http://localhost:3000/documentation).
+
 ## Développer
 
 Avant de développer, lire les règles [dans ce guide](CONTRIBUER.md).
