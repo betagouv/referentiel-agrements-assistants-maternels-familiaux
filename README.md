@@ -8,6 +8,10 @@ Le fondement législatif est [la loi n°2022-140 du 7 février 2022](https://www
 
 [Pour en savoir plus](https://beta.gouv.fr/startups/agrements-assistants-maternels-et-familiaux.html)
 
+## Utilisation
+
+Pour découvrir les routes API, visiter le [Swagger](https://agrements-assistants-maternels-familiaux.osc-fr1.scalingo.io/documentation) de la plateforme de développement.
+
 ## Installation
 
 Pour installer l'application en local, suivre [ce guide](INSTALLER.md).
