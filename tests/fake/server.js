@@ -1,4 +1,7 @@
 import Hapi from '@hapi/hapi';
+import Joi from 'joi';
+
+import { exists } from './person-repository.js';
 
 const createServer = async () => {
   const server = new Hapi.server({
@@ -7,13 +10,22 @@ const createServer = async () => {
 
   server.route([
     {
-      method: 'GET',
+      method: 'PUT',
       path: '/rnipp/person',
       config: {
         auth: false,
         tags: [],
-        handler: async () => {
-          return {};
+        payload: { allow: 'application/json' },
+        validate: {
+          payload: Joi.object({
+            name: Joi.string().required(),
+          }),
+        },
+        handler: async (request, h) => {
+          if (!exists({ name: request.payload.name })) {
+            return h.response().code(404);
+          }
+          return h.response().code(200);
         },
         notes: ["Cette route permet de vérifier l'identité d'une personne"],
       },
