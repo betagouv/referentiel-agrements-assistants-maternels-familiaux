@@ -22,10 +22,11 @@ const createServer = async () => {
           }),
         },
         handler: async (request, h) => {
-          if (!exists({ name: request.payload.name })) {
-            return h.response().code(404);
+          const personExists = await exists({ name: request.payload.name });
+          if (personExists) {
+            return h.response().code(200);
           }
-          return h.response().code(200);
+          return h.response().code(404);
         },
         notes: ["Cette route permet de vérifier l'identité d'une personne"],
       },
