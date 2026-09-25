@@ -6,6 +6,8 @@
   "scripts": {
     "fake:database:migrate": "knex --cwd ./tests/fake migrate:latest",
     "fake:database:status": "knex --cwd ./tests/fake migrate:list",
+    "fake:database:seed": "knex --cwd ./tests/fake seed:run",
+    "fake:start": "node tests/fake/serve.js",
     "lint": "npm run lint:filenames && npm run lint:dependencies && npm run lint:format && npm run lint:files:js",
     "lint:fix": "npm run lint:format:fix && npm run lint:files:js:fix",
     "lint:format": "oxfmt --check",

@@ -1,11 +1,12 @@
 import Hapi from '@hapi/hapi';
 import Joi from 'joi';
 
+import { configuration } from './configuration.js';
 import { exists } from './person-repository.js';
 
 const createServer = async () => {
   const server = new Hapi.server({
-    port: 3001,
+    port: configuration.apiListeningPort,
   });
 
   server.route([
