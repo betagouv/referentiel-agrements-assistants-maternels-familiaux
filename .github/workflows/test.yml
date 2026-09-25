@@ -6,6 +6,7 @@ on: [push]
 env:
   # https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#example-usage-of-the-vars-context
   API_LISTENING_PORT: ${{ vars.API_LISTENING_PORT }}
+  FAKE_RNIPP_API_LISTENING_PORT: ${{ vars.FAKE_RNIPP_API_LISTENING_PORT }}
   DATABASE_URL: ${{ vars.DATABASE_URL }}
 
 jobs:
@@ -36,5 +37,7 @@ jobs:
           # https://github.com/orgs/community/discussions/26671
           password: password
           database: database
+      - name: create database schema
+        run: npm run fake:database:migrate
       - name: run tests
         run: npm run test
