@@ -4,7 +4,8 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "test": "mocha --exit",
+    "fake:database:migrate": "knex --cwd ./tests/fake migrate:latest",
+    "fake:database:status": "knex --cwd ./tests/fake migrate:list",
     "lint": "npm run lint:filenames && npm run lint:dependencies && npm run lint:format && npm run lint:files:js",
     "lint:fix": "npm run lint:format:fix && npm run lint:files:js:fix",
     "lint:format": "oxfmt --check",
@@ -13,7 +14,8 @@
     "lint:files:js:fix": "eslint --fix .",
     "lint:filenames": "ls-lint",
     "lint:dependencies": "knip --no-progress",
-    "start": "node --no-warnings=ExperimentalWarning serve.js"
+    "start": "node --no-warnings=ExperimentalWarning serve.js",
+    "test": "mocha --exit"
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",

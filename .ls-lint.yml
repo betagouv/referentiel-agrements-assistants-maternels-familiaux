@@ -6,6 +6,10 @@ ls:
 
   .dir: kebab-case
 
+  tests:
+    fake:
+      migrations: snake_case
+
 ignore:
   - .git
   - .github

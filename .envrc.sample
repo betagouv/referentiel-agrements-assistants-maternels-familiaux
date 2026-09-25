@@ -9,3 +9,9 @@ export API_LISTENING_PORT=3000
 # =========
 
 export DATABASE_URL=postgresql://postgres:password@localhost
+
+# =========
+# Fake
+# =========
+
+export FAKE_RNIPP_API_LISTENING_PORT=3000
