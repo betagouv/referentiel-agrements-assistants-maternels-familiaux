@@ -1,7 +1,7 @@
 import Hapi from '@hapi/hapi';
 import Joi from 'joi';
 
-import { configuration } from './configuration.js';
+import { configuration } from '../configuration.js';
 import { exists } from './person-repository.js';
 
 const createServer = async () => {

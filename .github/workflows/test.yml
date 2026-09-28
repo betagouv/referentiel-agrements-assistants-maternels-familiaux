@@ -38,6 +38,6 @@ jobs:
           password: password
           database: database
       - name: create database schema
-        run: npm run fake:database:migrate
+        run: npm run fake:rnipp:database:migrate
       - name: run tests
         run: npm run test
