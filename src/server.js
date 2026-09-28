@@ -46,7 +46,7 @@ const createServer = async () => {
   ];
   server.route(routes);
 
-  await server.register([
+  const swaggerPlugins = [
     hapiInert,
     hapiVision,
     {
@@ -57,7 +57,8 @@ const createServer = async () => {
         },
       },
     },
-  ]);
+  ];
+  await server.register(swaggerPlugins);
 
   return server;
 };
