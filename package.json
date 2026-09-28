@@ -23,6 +23,7 @@
     "@hapi/hapi": "^21.4.10",
     "@hapi/inert": "^7.1.2",
     "@hapi/vision": "^7.0.3",
+    "hapi-pino": "^13.0.0",
     "hapi-swagger": "^17.3.2",
     "joi": "^17.13.8",
     "knex": "^3.3.0",
