@@ -1,6 +1,7 @@
 import Hapi from '@hapi/hapi';
 import hapiInert from '@hapi/inert';
 import hapiVision from '@hapi/vision';
+import hapiPino from 'hapi-pino';
 import hapiSwagger from 'hapi-swagger';
 
 import packageJSON from '../package.json' with { type: 'json' };
@@ -58,7 +59,9 @@ const createServer = async () => {
       },
     },
   ];
-  await server.register(swaggerPlugins);
+
+  const plugins = [...swaggerPlugins, { plugin: hapiPino }];
+  await server.register(plugins);
 
   return server;
 };
