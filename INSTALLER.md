@@ -106,7 +106,18 @@ L'ajout de l'addon PostgreSQL est effectué automatiquement grâce au fichier [d
 
 [Référence](https://doc.scalingo.com/platform/app/review-apps#addons-collaborators-and-environment-variables)
 
-### Simuler le RNIPP
+## Monitorer sur Sentry
+
+Créer un projet Sentry et récupérer le DSN.
+
+Renseigner la variable d'environnement `$SENTRY_DSN` avec l'URL du DSN, elle sera utilisée dans [le setup Sentry](instrument.cjs).
+
+Pour tester, appeler la route non authentifiée `/api/error`.
+```shell
+curl -i "http://localhost:3000/api/error"
+```
+
+## Simuler le RNIPP
 
 L'application est cliente du RNIPP. 
 Pour effectuer des tests en local, sans disposer de connexion au RNIPP, vous pouvez utiliser le fake.
