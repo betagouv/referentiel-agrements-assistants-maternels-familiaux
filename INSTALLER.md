@@ -47,6 +47,7 @@ Exécuter les tests automatisés.
 npm run test
 ```
 
+
 ## Démarrer l'application
 
 Démarrer la base de données.
@@ -125,9 +126,9 @@ Il dispose [de données de test](./tests/fake/seeds/person.js).
 
 Démarrez-le.
 ```shell
-npm run fake:database:migrate
-npm run fake:database:seed
-npm run fake:start
+npm run fake:rnipp:database:migrate
+npm run fake:rnipp:database:seed
+npm run fake:rnipp:start
 ```
 
 Vérifiez qu'il répond par une 200.
@@ -137,6 +138,11 @@ curl -i \
   --request PUT \
   --data '{"name":"Dorothy"}' \
   "http://localhost:3001/rnipp/person"
+```
+
+Pour supprimer les tables et données de test
+```shell
+docker compose down --volumes
 ```
 
 Le fake fait l'objet de tests automatisés en local et sur la CI, mais n'est pas disponible sur le PaaS.

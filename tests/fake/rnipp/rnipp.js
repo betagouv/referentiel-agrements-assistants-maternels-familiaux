@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { StatusCodes } from 'http-status-codes';
 
-import { knex } from './database-client.js';
+import { knex } from '../database/database-client.js';
 import { createServer } from './server.js';
 
 describe('RNIPP', function () {

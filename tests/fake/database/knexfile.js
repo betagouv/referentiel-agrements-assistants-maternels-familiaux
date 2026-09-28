@@ -1,4 +1,4 @@
-import { configuration as apiConfiguration } from './configuration.js';
+import { configuration as apiConfiguration } from '../configuration.js';
 
 const configuration = {
   client: 'pg',
