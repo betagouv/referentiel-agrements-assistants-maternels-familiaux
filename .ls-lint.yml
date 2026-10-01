@@ -8,7 +8,8 @@ ls:
 
   tests:
     fake:
-      migrations: snake_case
+      database:
+        migrations: snake_case
 
 ignore:
   - .git
