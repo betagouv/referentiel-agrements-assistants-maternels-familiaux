@@ -4,9 +4,10 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "fake:rnipp:database:migrate": "knex --cwd ./tests/fake/database migrate:latest",
-    "fake:rnipp:database:status": "knex --cwd ./tests/fake/database migrate:list",
-    "fake:rnipp:database:seed": "knex --cwd ./tests/fake/database seed:run",
+    "fake:database:migrate": "knex --cwd ./tests/fake/database migrate:latest",
+    "fake:database:status": "knex --cwd ./tests/fake/database migrate:list",
+    "fake:database:seed": "knex --cwd ./tests/fake/database seed:run",
+    "fake:pajemploi:start": "node tests/fake/pajemploi/serve.js",
     "fake:rnipp:start": "node tests/fake/rnipp/serve.js",
     "lint": "npm run lint:filenames && npm run lint:dependencies && npm run lint:format && npm run lint:files:js",
     "lint:fix": "npm run lint:format:fix && npm run lint:files:js:fix",

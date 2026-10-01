@@ -16,6 +16,8 @@ export DATABASE_URL=postgresql://postgres:password@localhost
 
 export FAKE_RNIPP_API_LISTENING_PORT=3001
 
+export FAKE_PAJEMPLOI_API_LISTENING_PORT=3002
+
 # =========
 # Monitoring
 # =========
