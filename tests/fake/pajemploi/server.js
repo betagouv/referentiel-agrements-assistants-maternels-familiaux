@@ -1,6 +1,8 @@
 import Hapi from '@hapi/hapi';
+import Joi from 'joi';
 
 import { configuration } from '../configuration.js';
+import { get } from './agrement-repository.js';
 
 const createServer = async () => {
   const server = new Hapi.server({
@@ -13,9 +15,17 @@ const createServer = async () => {
       path: '/pajemploi/agrement',
       config: {
         auth: false,
+        tags: [],
+        payload: { allow: 'application/json' },
+        validate: {
+          payload: Joi.object({
+            nom: Joi.string().required(),
+          }),
+        },
         handler: async (request, hapi) => {
-          if (request.payload.name === 'Jane') {
-            return { nom: 'Jane', type: 'maternel' };
+          const agrement = await get({ nom: request.payload.nom });
+          if (agrement) {
+            return agrement;
           }
           return hapi.response().code(404);
         },
