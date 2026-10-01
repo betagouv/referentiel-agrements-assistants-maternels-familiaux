@@ -3,6 +3,7 @@ import hapiInert from '@hapi/inert';
 import hapiVision from '@hapi/vision';
 import hapiPino from 'hapi-pino';
 import hapiSwagger from 'hapi-swagger';
+import Joi from 'joi';
 
 import packageJSON from '../package.json' with { type: 'json' };
 import { configuration } from './configuration.js';
@@ -32,6 +33,29 @@ const createServer = async () => {
           };
         },
         notes: ["Cette route permet d'obtenir la version de l'application et le statut des ressources."],
+      },
+    },
+    {
+      method: 'PUT',
+      path: '/api/agrement',
+      config: {
+        auth: false,
+        tags: ['api'],
+        payload: { allow: 'application/json' },
+        validate: {
+          payload: Joi.object({
+            personne: {
+              nom: Joi.string().required(),
+            },
+            agrement: {
+              dateDelivrance: Joi.string().required(),
+            },
+          }),
+        },
+        handler: async (request, hapi) => {
+          return hapi.response().code(200);
+        },
+        notes: ["Cette route permet de délivrer un agrément d'assistant familial."],
       },
     },
     {
