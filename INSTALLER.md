@@ -85,7 +85,9 @@ Configurée automatiquement par le fichier [dédié](.github/workflows/test.yml)
 
 Créez un environnement `main`.
 
-Ajoutez-y les variables d'environnement, voir [.envrc](.envrc.sample)
+Ajoutez-y les variables d'environnement :
+- de l'API, voir [.envrc](.envrc.sample);
+- des fakes, voir [.envrc](.envrc.sample).
 
 ## Déployer sur Scalingo
 

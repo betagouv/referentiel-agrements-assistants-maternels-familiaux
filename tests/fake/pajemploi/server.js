@@ -6,7 +6,7 @@ import { get } from './agrement-repository.js';
 
 const createServer = async () => {
   const server = new Hapi.server({
-    port: configuration.apiListeningPort,
+    port: configuration.pajemploi.apiListeningPort,
   });
 
   server.route([

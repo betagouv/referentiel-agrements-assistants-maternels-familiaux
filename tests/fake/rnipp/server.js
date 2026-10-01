@@ -6,7 +6,7 @@ import { exists } from './person-repository.js';
 
 const createServer = async () => {
   const server = new Hapi.server({
-    port: configuration.apiListeningPort,
+    port: configuration.rnipp.apiListeningPort,
   });
 
   server.route([
