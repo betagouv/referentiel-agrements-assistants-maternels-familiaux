@@ -9,8 +9,8 @@ describe('RNIPP', function () {
     describe('if the person exists', function () {
       it('should return 200 (OK)', async function () {
         // given
-        await knex('person').truncate();
-        await knex('person').insert({ name: 'Jane' });
+        await knex.withSchema('rnipp').table('person').truncate();
+        await knex.withSchema('rnipp').table('person').insert({ name: 'Jane' });
         const server = await createServer();
 
         // when
@@ -25,8 +25,8 @@ describe('RNIPP', function () {
     describe('if the person does not exist', function () {
       it('should return 404 (NOT FOUND)', async function () {
         // given
-        await knex('person').truncate();
-        await knex('person').insert({ name: 'Jane' });
+        await knex.withSchema('rnipp').table('person').truncate();
+        await knex.withSchema('rnipp').table('person').insert({ name: 'Jane' });
         const server = await createServer();
 
         // when
