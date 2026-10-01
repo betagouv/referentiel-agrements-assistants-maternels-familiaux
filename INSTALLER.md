@@ -66,7 +66,7 @@ Parcourir les routes disponibles [avec Swagger](http://localhost:3000/documentat
 
 Avant de développer, lire les règles [dans ce guide](CONTRIBUER.md).
 
-### Configuration de l'IDE
+### Configurer l'IDE
 
 #### Variables d'environnement
 
@@ -151,6 +151,11 @@ curl -i \
 Pour supprimer les tables et données de test
 ```shell
 docker compose down --volumes
+```
+
+Pour créer une migration
+```shell
+npx knex --cwd ./tests/fake/database migrate:make $NOM_MIGRATION
 ```
 
 Le fake fait l'objet de tests automatisés en local et sur la CI, mais n'est pas disponible sur le PaaS.
