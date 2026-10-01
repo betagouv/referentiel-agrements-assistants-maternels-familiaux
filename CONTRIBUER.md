@@ -39,3 +39,5 @@ Les règles de lint suivent le set `recommended`, et quelques règles supplémen
 - [assertion de test](https://github.com/Turbo87/eslint-plugin-chai-expect#rules) ;
 - [sécurité Node](https://eslint.interlace.tools/docs/security/plugin-node-security/) - set `strict`;
 - [code Yaml](https://ota-meshi.github.io/eslint-plugin-yml/rules/).
+
+La configuration est passé aux CLI utilisé par  `npm` par des dotfile plutôt que par des options, par exemple [.mocharc.json](.mocharc.json).  
