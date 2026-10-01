@@ -66,10 +66,18 @@ Parcourir les routes disponibles [avec Swagger](http://localhost:3000/documentat
 
 Avant de développer, lire les règles [dans ce guide](CONTRIBUER.md).
 
+### Configuration de l'IDE
+
+#### Variables d'environnement
+
 Pour disposer des variables d'environnement :
 - soit lancez votre IDE depuis un terminal ;
 - soit configurez manuellement les variables dans l'environnement d'exécution de votre IDE ;
 - soit utilisez [un plugin](https://plugins.jetbrains.com/plugin/19275-better-direnv).
+
+#### Framework de test
+
+Dans l'environnement d'exécution Mocha, ajouter l'option `--exit`, présente dans [.mocharc.json](.mocharc.json).
 
 ## Tester sur Github
 

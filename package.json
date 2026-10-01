@@ -17,7 +17,7 @@
     "lint:filenames": "ls-lint",
     "lint:dependencies": "knip --no-progress",
     "start": "node --import ./instrument.cjs --no-warnings=ExperimentalWarning serve.js",
-    "test": "mocha --exit"
+    "test": "mocha"
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",
