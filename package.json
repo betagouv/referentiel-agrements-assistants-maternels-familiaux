@@ -4,6 +4,8 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
+    "database:migrate": "knex --cwd ./src/database migrate:latest",
+    "database:status": "knex --cwd ./src/database migrate:list",
     "fake:database:migrate": "knex --cwd ./tests/fake/database migrate:latest",
     "fake:database:status": "knex --cwd ./tests/fake/database migrate:list",
     "fake:database:seed": "knex --cwd ./tests/fake/database seed:run",
