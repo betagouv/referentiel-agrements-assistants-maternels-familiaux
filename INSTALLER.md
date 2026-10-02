@@ -79,6 +79,12 @@ Pour disposer des variables d'environnement :
 
 Dans l'environnement d'exécution Mocha, ajouter l'option `--exit`, présente dans [.mocharc.json](.mocharc.json).
 
+### Créer une migration
+
+```shell
+npx knex --cwd ./src/database migrate:make $NOM_MIGRATION
+```
+
 ## Tester sur Github
 
 Configurée automatiquement par le fichier [dédié](.github/workflows/test.yml).
