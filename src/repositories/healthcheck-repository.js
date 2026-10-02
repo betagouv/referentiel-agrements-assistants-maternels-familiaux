@@ -1,4 +1,4 @@
-import { knex } from './database-client.js';
+import { knex } from '../database-client.js';
 
 const status = async () => {
   try {

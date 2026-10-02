@@ -7,7 +7,7 @@ import Joi from 'joi';
 
 import packageJSON from '../package.json' with { type: 'json' };
 import { configuration } from './configuration.js';
-import { status } from './healthcheck-repository.js';
+import { status } from './repositories/healthcheck-repository.js';
 
 const createServer = async () => {
   const server = new Hapi.server({
