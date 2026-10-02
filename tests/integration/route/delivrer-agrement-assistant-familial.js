@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { StatusCodes } from 'http-status-codes';
 
-import { knex } from '../../src/database-client.js';
-import { createServer } from '../../src/server.js';
+import { knex } from '../../../src/database-client.js';
+import { createServer } from '../../../src/server.js';
 
 describe('Integration | Route', function () {
   describe('PUT /api/agrement', function () {
@@ -22,6 +22,7 @@ describe('Integration | Route', function () {
         });
         it('doit créer la personne', async function () {
           // given
+          await knex.table('personne').truncate();
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
           const server = await createServer();
           const query = { method: 'PUT', url: '/api/agrement', payload };
@@ -31,7 +32,7 @@ describe('Integration | Route', function () {
           const actual = await knex('personne').where({ nom: 'Dorothy' });
 
           // then
-          expect(actual.rows.length).to.equal(1);
+          expect(actual.length).to.equal(1);
         });
       });
     });
