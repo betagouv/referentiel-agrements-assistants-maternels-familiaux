@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { StatusCodes } from 'http-status-codes';
 
+import { knex } from '../../src/database-client.js';
 import { createServer } from '../../src/server.js';
 
 describe('Integration | Route', function () {
@@ -18,6 +19,19 @@ describe('Integration | Route', function () {
 
           // then
           expect(response.statusCode).to.equal(StatusCodes.OK);
+        });
+        it('doit créer la personne', async function () {
+          // given
+          const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
+          const server = await createServer();
+          const query = { method: 'PUT', url: '/api/agrement', payload };
+
+          // when
+          await server.inject(query);
+          const actual = await knex('personne').where({ nom: 'Dorothy' });
+
+          // then
+          expect(actual.rows.length).to.equal(1);
         });
       });
     });
