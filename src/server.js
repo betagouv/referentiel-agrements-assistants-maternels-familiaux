@@ -8,6 +8,7 @@ import Joi from 'joi';
 import packageJSON from '../package.json' with { type: 'json' };
 import { configuration } from './configuration.js';
 import { status } from './repositories/healthcheck-repository.js';
+import { persister } from './repositories/personne-repository.js';
 
 const createServer = async () => {
   const server = new Hapi.server({
@@ -53,6 +54,7 @@ const createServer = async () => {
           }),
         },
         handler: async (request, hapi) => {
+          await persister({ nom: request.payload.personne.nom });
           return hapi.response().code(200);
         },
         notes: ["Cette route permet de délivrer un agrément d'assistant familial."],
