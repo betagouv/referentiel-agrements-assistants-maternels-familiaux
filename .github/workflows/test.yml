@@ -39,6 +39,8 @@ jobs:
           password: password
           database: database
       - name: create database schema
+        run: npm run database:migrate
+      - name: create fake database schema
         run: npm run fake:database:migrate
       - name: run tests
         run: npm run test
