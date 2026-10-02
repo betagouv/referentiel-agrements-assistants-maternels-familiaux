@@ -4,7 +4,7 @@ const configuration = {
   client: 'pg',
   migrations: {
     directory: './migrations/',
-    tableName: 'knex_migrations_fake',
+    tableName: 'knex_migrations',
   },
   connection: {
     connectionString: apiConfiguration.database.url,
