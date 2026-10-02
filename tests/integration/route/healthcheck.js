@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { StatusCodes } from 'http-status-codes';
 
-import { createServer } from '../../src/server.js';
+import { createServer } from '../../../src/server.js';
 
 describe('Integration | Route', function () {
   describe('GET /api', function () {
