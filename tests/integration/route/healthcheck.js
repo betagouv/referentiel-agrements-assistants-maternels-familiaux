@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import { StatusCodes } from 'http-status-codes';
 
-import { createServer } from '../../src/server.js';
+import { createServer } from '../../../src/server.js';
 
-describe('Integration | Route | api', function () {
+describe('Integration | Route', function () {
   describe('GET /api', function () {
     describe('if the server if properly configured', function () {
       it('should return OK (200)', async function () {
