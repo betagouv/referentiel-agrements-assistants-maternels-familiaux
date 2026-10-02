@@ -6,6 +6,10 @@ ls:
 
   .dir: kebab-case
 
+  src:
+    database:
+      migrations: snake_case
+
   tests:
     fake:
       database:
