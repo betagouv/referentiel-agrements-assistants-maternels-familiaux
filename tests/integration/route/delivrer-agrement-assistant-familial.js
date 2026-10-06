@@ -20,8 +20,9 @@ describe('Integration | Route', function () {
           // then
           expect(response.statusCode).to.equal(StatusCodes.OK);
         });
-        it('doit créer la personne', async function () {
+        it('doit persister la personne', async function () {
           // given
+          await knex.table('agrement').truncate();
           await knex.table('personne').truncate();
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
           const server = await createServer();
@@ -33,6 +34,22 @@ describe('Integration | Route', function () {
 
           // then
           expect(actual.length).to.equal(1);
+        });
+        it("doit persister l'agrément", async function () {
+          // given
+          await knex.table('agrement').truncate();
+          await knex.table('personne').truncate();
+          const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
+          const server = await createServer();
+          const query = { method: 'PUT', url: '/api/agrement', payload };
+
+          // when
+          await server.inject(query);
+          const actual = await knex('agrement').where({ nom: 'Dorothy' });
+
+          // then
+          expect(actual.length).to.equal(1);
+          expect(actual[0].dateDeDelivrance.toDateString()).to.equal(new Date('2003-01-01').toDateString());
         });
       });
     });
