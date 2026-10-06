@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { knex } from '../../../src/database-client.js';
+import { knex } from '../../../src/database/database-client.js';
 import { persister } from '../../../src/repositories/agrement-repository.js';
 
 describe('Integration | Repository | agrément', function () {
