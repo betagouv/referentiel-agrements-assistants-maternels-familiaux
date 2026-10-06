@@ -1,0 +1,15 @@
+@startuml
+
+actor PMI_maternel #blue
+participant gestion_dossier
+participant référentiel_agréments_api
+participant référentiel_agréments_bdd
+participant RNIPP
+
+PMI_maternel -> gestion_dossier : accord d'agrément familial
+gestion_dossier -> référentiel_agréments_api : agrément familial accordé
+référentiel_agréments_api -> RNIPP : la personne existe-t-elle ?
+RNIPP -> référentiel_agréments_api: personne connue
+référentiel_agréments_api -> référentiel_agréments_bdd : persister personne et agrément familial
+
+@enduml

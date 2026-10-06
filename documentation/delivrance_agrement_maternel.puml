@@ -1,0 +1,10 @@
+@startuml
+
+actor PMI_familial #green
+participant gestion_dossier
+participant Pajemploi
+
+PMI_familial -> gestion_dossier : accord d'agrément
+gestion_dossier -> Pajemploi : agrément accordé
+
+@enduml
