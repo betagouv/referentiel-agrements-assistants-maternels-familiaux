@@ -1,0 +1,23 @@
+@startuml
+
+actor assistant #green
+participant démarche_simplifiée
+
+actor PMI #blue
+participant gestion_dossier
+
+participant référentiel_agréments_api
+participant référentiel_agréments_bdd
+participant Pajemploi
+
+assistant -> démarche_simplifiée : demande d'agrément
+démarche_simplifiée -> référentiel_agréments_api : historique de la personne
+référentiel_agréments_api -> Pajemploi : historique de la personne \n assistant maternel
+Pajemploi -> référentiel_agréments_api : agrément(s) sans retrait
+référentiel_agréments_api -> référentiel_agréments_bdd : historique de la personne \n assistant familial
+référentiel_agréments_bdd -> référentiel_agréments_api : agrément(s) sans retrait
+référentiel_agréments_api -> démarche_simplifiée : historique de la personne
+démarche_simplifiée -> gestion_dossier : transmission de la demande
+PMI -> gestion_dossier : consultation de l'historique
+
+@enduml

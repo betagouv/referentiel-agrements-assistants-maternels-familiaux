@@ -15,3 +15,27 @@ Pour découvrir les routes API, visiter le [Swagger](https://agrements-assistant
 ## Installation
 
 Pour installer l'application en local, suivre [ce guide](INSTALLER.md).
+
+## Architecture
+
+Voilà un aperçu des applications impliquées lors du cycle de vie ([source](documentation)).
+
+### Délivrance d'agrément
+
+Le référentiel des agréments stocke les agréments d'assistants familiaux.
+
+![Assistant familial](documentation/delivrance_agrement_familial.svg)
+
+Le référentiel des agréments ne stocke pas les agréments d'assistants maternels.
+
+![Assistant maternel](documentation/delivrance_agrement_maternel.svg)
+
+### Demande d'agrément
+
+Sur la base des agréments précédemment délivrés, on informe le service PMI qui décide de la suite à donner.
+
+![Dépôt d'agrément](documentation/demande_agrement.svg)
+
+Le référentiel consulte :
+- pour les agréments d'assistants familiaux : sa base de données ;
+- pour les agréments d'assistants maternels : l'API Pajemploi.
