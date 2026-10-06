@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { StatusCodes } from 'http-status-codes';
 
-import { knex } from '../../../src/database-client.js';
+import { knex } from '../../../src/database/database-client.js';
 import { createServer } from '../../../src/server.js';
 
 describe('Integration | Route', function () {
