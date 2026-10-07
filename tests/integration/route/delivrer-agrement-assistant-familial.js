@@ -7,7 +7,7 @@ import { createServer } from '../../../src/server.js';
 describe('Integration | Route', function () {
   describe('PUT /api/agrement', function () {
     describe("Si ni la personne, ni l'agrément n'existent", function () {
-      describe('Si la requête est valide', function () {
+      describe("Si l'identité de la personne est valide", function () {
         it('doit retourner OK (200)', async function () {
           // given
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
