@@ -20,5 +20,8 @@
       "size": "S"
     }
   },
+  "scripts": {
+    "first-deploy": "npm run database:migrate && npm run database:seed"
+  },
   "stack": "scalingo-26"
 }
