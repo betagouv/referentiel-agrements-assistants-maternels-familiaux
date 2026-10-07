@@ -123,6 +123,13 @@ L'ajout de l'addon PostgreSQL est effectué automatiquement grâce au fichier [d
 
 [Référence](https://doc.scalingo.com/platform/app/review-apps#addons-collaborators-and-environment-variables)
 
+Le schéma de la base de données est [créé automatiquement](src/database/migrations) (migrations), ainsi que des [jeux de test manuels](src/database/seeds) (seeds).
+
+Pour tester des montées et descentes de migrations, connectez-vous en CLI. 
+```shell
+scalingo --app $NOM_APPLICATION-pr$NUMERO_PULL_REQUEST run bash
+```
+
 ## Monitorer sur Sentry
 
 Créer un projet Sentry et récupérer le DSN.

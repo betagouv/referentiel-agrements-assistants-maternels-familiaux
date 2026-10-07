@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "database:migrate": "knex --cwd ./src/database migrate:latest",
+    "database:seed": "knex --cwd ./src/database seed:run",
     "database:status": "knex --cwd ./src/database migrate:list",
     "fake:database:migrate": "knex --cwd ./tests/fake/database migrate:latest",
     "fake:database:status": "knex --cwd ./tests/fake/database migrate:list",
