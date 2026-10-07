@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import nock from 'nock';
 
 import { existe } from '../../../src/repositories/identite-repository.js';
 
@@ -7,10 +8,11 @@ describe('Integration | Repository | Identité', function () {
     describe("si la personne n'existe pas", function () {
       it('doit renvoyer false', async function () {
         // given
+        nock('https://rnipp').get('/identite?name=Dorothy').reply(404);
         const personne = { nom: 'Dorothy' };
 
         // when
-        const result = existe(personne);
+        const result = await existe(personne);
 
         // then
         expect(result).to.be.false;
@@ -19,10 +21,11 @@ describe('Integration | Repository | Identité', function () {
     describe('si la personne existe', function () {
       it('doit renvoyer true', async function () {
         // given
+        nock('https://rnipp').get('/identite?name=Elisabeth').reply(200);
         const personne = { nom: 'Elisabeth' };
 
         // when
-        const result = existe(personne);
+        const result = await existe(personne);
 
         // then
         expect(result).to.be.true;
