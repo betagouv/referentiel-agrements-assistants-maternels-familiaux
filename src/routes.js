@@ -3,6 +3,7 @@ import Joi from 'joi';
 import packageJSON from '../package.json' with { type: 'json' };
 import * as agrementRepository from './repositories/agrement-repository.js';
 import { status } from './repositories/healthcheck-repository.js';
+import * as identiteRepository from './repositories/identite-repository.js';
 import * as personneRepository from './repositories/personne-repository.js';
 
 const routes = [
@@ -45,13 +46,18 @@ const routes = [
       },
       handler: async (request, hapi) => {
         const nom = request.payload.personne.nom;
-        const dateDeDelivrance = request.payload.agrement.dateDelivrance;
-        await personneRepository.persister({ nom });
-        await agrementRepository.persister({
-          nom,
-          dateDeDelivrance,
-        });
-        return hapi.response().code(200);
+        const lIdentiteDeLaPersonneEstValide = await identiteRepository.existe({ nom });
+        if (lIdentiteDeLaPersonneEstValide) {
+          const dateDeDelivrance = request.payload.agrement.dateDelivrance;
+          await personneRepository.persister({ nom });
+          await agrementRepository.persister({
+            nom,
+            dateDeDelivrance,
+          });
+          return hapi.response().code(200);
+        } else {
+          return hapi.response().code(400);
+        }
       },
       notes: ["Cette route permet de délivrer un agrément d'assistant familial."],
     },
