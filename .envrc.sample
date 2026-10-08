@@ -11,6 +11,13 @@ export API_LISTENING_PORT=3000
 export DATABASE_URL=postgresql://postgres:password@localhost
 
 # =========
+# Dependencies
+# =========
+
+export RNIPP_BASE_URL=$URL
+
+
+# =========
 # Fake
 # =========
 
