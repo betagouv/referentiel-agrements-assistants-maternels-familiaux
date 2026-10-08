@@ -6,9 +6,12 @@ on: [push]
 env:
   # https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#example-usage-of-the-vars-context
   API_LISTENING_PORT: ${{ vars.API_LISTENING_PORT }}
+  RNIPP_BASE_URL: ${{ vars.RNIPP_BASE_URL }}
+  RNIPP_TIMEOUT_MILLISECONDS: ${{ vars.RNIPP_TIMEOUT_MILLISECONDS }}
+  DATABASE_URL: ${{ vars.DATABASE_URL }}
+  # fakes
   FAKE_RNIPP_API_LISTENING_PORT: ${{ vars.FAKE_RNIPP_API_LISTENING_PORT }}
   FAKE_PAJEMPLOI_API_LISTENING_PORT: ${{ vars.FAKE_PAJEMPLOI_API_LISTENING_PORT }}
-  DATABASE_URL: ${{ vars.DATABASE_URL }}
 
 jobs:
   build:

@@ -16,6 +16,8 @@ export DATABASE_URL=postgresql://postgres:password@localhost
 
 export RNIPP_BASE_URL=$URL
 
+export RNIPP_TIMEOUT_MILLISECONDS=500
+
 
 # =========
 # Fake

@@ -1,8 +1,8 @@
 import { configuration } from '../configuration.js';
 const baseUrl = configuration.dependencies.rnipp.baseUrl;
+const timeoutMilliseconds = configuration.dependencies.rnipp.timeout;
 
 const existe = async ({ nom }) => {
-  const timeoutMilliseconds = 500;
   const route = 'identite';
   const queryParam = `?name=${nom}`;
   const url = `${baseUrl}/${route}${queryParam}`;
