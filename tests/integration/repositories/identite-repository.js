@@ -33,8 +33,8 @@ describe('Integration | Repository | Identité', function () {
         expect(result).to.be.true;
       });
     });
-    describe(`si le RNIPP met plus d'une seconde à répondre`, function () {
-      it('doit lever une erreur', async function () {
+    describe(`si le RNIPP met plus du temps alloué à répondre (timeout)`, function () {
+      it('doit lever une erreur mentionnant le temps alloué', async function () {
         // given
         const oneSecond = 1000;
         nock(baseUrl).get('/identite?name=Elisabeth').delay(oneSecond).reply(200);
