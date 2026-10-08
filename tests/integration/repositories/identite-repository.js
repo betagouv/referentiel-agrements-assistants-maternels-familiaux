@@ -33,5 +33,47 @@ describe('Integration | Repository | Identité', function () {
         expect(result).to.be.true;
       });
     });
+    describe(`si le RNIPP met plus d'une seconde à répondre`, function () {
+      it('doit lever une erreur', async function () {
+        // given
+        const oneSecond = 1000;
+        nock(baseUrl).get('/identite?name=Elisabeth').delay(oneSecond).reply(200);
+        const personne = { nom: 'Elisabeth' };
+
+        // when
+        let actual;
+        try {
+          await existe(personne);
+        } catch (error) {
+          actual = error;
+        }
+
+        // then
+        const expected = new Error(`L'appel au RNIPP a pris plus de 500 ms.`);
+        expect(actual.message).to.equal(expected.message);
+      });
+    });
+    describe(`si le RNIPP renvoie une erreur 500`, function () {
+      it('doit lever une erreur contenant le code retour', async function () {
+        // given
+        nock(baseUrl).get('/identite?name=Elisabeth').reply(500);
+        const personne = { nom: 'Elisabeth' };
+
+        // when
+        let actual;
+        try {
+          await existe(personne);
+        } catch (error) {
+          actual = error;
+        }
+
+        // then
+        const expected = new Error(`L'appel au RNIPP a échoué`, {
+          cause: { message: `L'appel au RNIPP a renvoyé une erreur 500` },
+        });
+        expect(actual.message).to.deep.equal(expected.message);
+        expect(actual.cause.message).to.deep.equal(expected.cause.message);
+      });
+    });
   });
 });
