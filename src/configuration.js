@@ -7,6 +7,11 @@ const schema = Joi.object({
   database: {
     url: Joi.string().uri().required(),
   },
+  dependencies: {
+    rnipp: {
+      baseUrl: Joi.string().uri().required(),
+    },
+  },
 }).options({ allowUnknown: false });
 
 /*eslint-disable no-undef,n/no-process-env*/
@@ -14,6 +19,11 @@ const configuration = {
   apiListeningPort: process.env.API_LISTENING_PORT,
   database: {
     url: process.env.DATABASE_URL,
+  },
+  dependencies: {
+    rnipp: {
+      baseUrl: process.env.RNIPP_BASE_URL,
+    },
   },
 };
 /*eslint-enable no-undef,n/no-process-env*/
