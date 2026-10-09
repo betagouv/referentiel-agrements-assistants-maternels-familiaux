@@ -33,7 +33,7 @@ const route = {
         });
         return hapi.response().code(200);
       } else {
-        return hapi.response().code(400);
+        return hapi.response(`L'identité du demandeur doit être connue dans le RNIPP`).code(400);
       }
     },
     notes: ["Cette route permet de délivrer un agrément d'assistant familial."],

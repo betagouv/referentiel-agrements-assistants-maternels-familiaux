@@ -14,8 +14,8 @@ describe('RNIPP', function () {
         const server = await createServer();
 
         // when
-        const name = 'Jane';
-        const query = { method: 'PUT', url: '/rnipp/person', payload: { name } };
+        const nom = 'Jane';
+        const query = { method: 'PUT', url: '/rnipp/identite', payload: { nom } };
         const { statusCode } = await server.inject(query);
 
         // then
@@ -30,12 +30,25 @@ describe('RNIPP', function () {
         const server = await createServer();
 
         // when
-        const name = 'Mary';
-        const query = { method: 'PUT', url: '/rnipp/person', payload: { name } };
+        const nom = 'Mary';
+        const query = { method: 'PUT', url: '/rnipp/identite', payload: { nom } };
         const response = await server.inject(query);
 
         // then
         expect(response.statusCode).to.equal(StatusCodes.NOT_FOUND);
+      });
+    });
+    describe('if the payload is not valid', function () {
+      it('should return 400 (BAD REQUEST)', async function () {
+        // given
+        const server = await createServer();
+
+        // when
+        const query = { method: 'PUT', url: '/rnipp/identite', payload: { foo: 'bar' } };
+        const response = await server.inject(query);
+
+        // then
+        expect(response.statusCode).to.equal(StatusCodes.BAD_REQUEST);
       });
     });
   });

@@ -3,14 +3,20 @@ const baseUrl = configuration.dependencies.rnipp.baseUrl;
 const timeoutMilliseconds = configuration.dependencies.rnipp.timeout;
 
 const existe = async ({ nom }) => {
+  const method = 'PUT';
   const route = 'identite';
-  const queryParam = `?name=${nom}`;
-  const url = `${baseUrl}/${route}${queryParam}`;
+  const url = `${baseUrl}/${route}`;
+  const body = JSON.stringify({ nom });
+  const headers = {
+    'Content-Type': 'application/json',
+  };
 
   try {
     // eslint-disable-next-line no-undef
     const response = await fetch(url, {
-      method: 'GET',
+      method,
+      headers,
+      body,
       // eslint-disable-next-line no-undef
       signal: AbortSignal.timeout(timeoutMilliseconds),
     });

@@ -1,4 +1,5 @@
 import Hapi from '@hapi/hapi';
+import hapiPino from 'hapi-pino';
 import Joi from 'joi';
 
 import { configuration } from '../configuration.js';
@@ -9,21 +10,24 @@ const createServer = async () => {
     port: configuration.rnipp.apiListeningPort,
   });
 
+  const plugins = [{ plugin: hapiPino, options: { logPayload: true } }];
+  await server.register(plugins);
+
   server.route([
     {
       method: 'PUT',
-      path: '/rnipp/person',
+      path: '/rnipp/identite',
       config: {
         auth: false,
         tags: [],
         payload: { allow: 'application/json' },
         validate: {
           payload: Joi.object({
-            name: Joi.string().required(),
+            nom: Joi.string().required(),
           }),
         },
         handler: async (request, h) => {
-          const personExists = await exists({ name: request.payload.name });
+          const personExists = await exists({ name: request.payload.nom });
           if (personExists) {
             return h.response().code(200);
           }
