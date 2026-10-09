@@ -5,7 +5,20 @@ import { knex } from '../database/database-client.js';
 import { createServer } from './server.js';
 
 describe('RNIPP', function () {
-  describe('PUT /person', function () {
+  describe('GET /rnipp', function () {
+    it('should return 200 (OK)', async function () {
+      // given
+      const server = await createServer();
+
+      // when
+      const query = { method: 'GET', url: '/rnipp' };
+      const { statusCode } = await server.inject(query);
+
+      // then
+      expect(statusCode).to.equal(StatusCodes.OK);
+    });
+  });
+  describe('PUT /rnipp/person', function () {
     describe('if the person exists', function () {
       it('should return 200 (OK)', async function () {
         // given
