@@ -47,6 +47,11 @@ Exécuter les tests automatisés.
 npm run test
 ```
 
+Exécuter les tests de bout en bout
+```shell
+npm start &
+npm run test:end-to-end
+```
 
 ## Démarrer l'application
 
@@ -149,8 +154,8 @@ Il dispose [de données de test](./tests/fake/seeds/person.js).
 
 Démarrez-le.
 ```shell
-npm run fake:rnipp:database:migrate
-npm run fake:rnipp:database:seed
+npm run fake:database:migrate
+npm run fake:database:seed
 npm run fake:rnipp:start
 ```
 
@@ -159,7 +164,7 @@ Vérifiez qu'il répond par une 200.
 curl -i \
   --header "Content-Type: application/json" \
   --request PUT \
-  --data '{"name":"Dorothy"}' \
+  --data '{"nom":"Dorothy"}' \
   "http://localhost:3001/rnipp/person"
 ```
 

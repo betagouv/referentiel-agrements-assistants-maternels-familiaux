@@ -12,7 +12,13 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
       describe("Si l'identité de la personne est valide", function () {
         it('doit retourner OK (200)', async function () {
           // given
-          nock(baseUrl).get('/identite?name=Dorothy').reply(200);
+          nock(baseUrl, {
+            reqheaders: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .put('/identite', { nom: 'Dorothy' })
+            .reply(200);
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
           const server = await createServer();
           const query = { method: 'PUT', url: '/api/agrement', payload };
@@ -25,7 +31,13 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
         });
         it('doit persister la personne', async function () {
           // given
-          nock(baseUrl).get('/identite?name=Dorothy').reply(200);
+          nock(baseUrl, {
+            reqheaders: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .put('/identite', { nom: 'Dorothy' })
+            .reply(200);
           await knex.table('agrement').truncate();
           await knex.table('personne').truncate();
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
@@ -41,7 +53,13 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
         });
         it("doit persister l'agrément", async function () {
           // given
-          nock(baseUrl).get('/identite?name=Dorothy').reply(200);
+          nock(baseUrl, {
+            reqheaders: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .put('/identite', { nom: 'Dorothy' })
+            .reply(200);
           await knex.table('agrement').truncate();
           await knex.table('personne').truncate();
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
@@ -60,7 +78,13 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
       describe("Si l'identité de la personne n'est pas valide", function () {
         it('doit retourner BAD_REQUEST (400)', async function () {
           // given
-          nock(baseUrl).get('/identite?name=Dorothy').reply(404);
+          nock(baseUrl, {
+            reqheaders: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .put('/identite', { nom: 'Dorothy' })
+            .reply(404);
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
           const server = await createServer();
           const query = { method: 'PUT', url: '/api/agrement', payload };
@@ -70,10 +94,17 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
 
           // then
           expect(response.statusCode).to.equal(StatusCodes.BAD_REQUEST);
+          expect(response.payload).to.equal("L'identité du demandeur doit être connue dans le RNIPP");
         });
         it('ne doit pas persister la personne', async function () {
           // given
-          nock(baseUrl).get('/identite?name=Dorothy').reply(404);
+          nock(baseUrl, {
+            reqheaders: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .put('/identite', { nom: 'Dorothy' })
+            .reply(404);
           await knex.table('agrement').truncate();
           await knex.table('personne').truncate();
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
@@ -89,7 +120,13 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
         });
         it("ne doit pas persister l'agrément", async function () {
           // given
-          nock(baseUrl).get('/identite?name=Dorothy').reply(404);
+          nock(baseUrl, {
+            reqheaders: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .put('/identite', { nom: 'Dorothy' })
+            .reply(404);
           await knex.table('agrement').truncate();
           await knex.table('personne').truncate();
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };

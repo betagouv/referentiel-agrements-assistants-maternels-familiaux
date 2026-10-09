@@ -6,12 +6,19 @@ import { existe } from '../../../src/repositories/identite-repository.js';
 
 describe('Integration | Repository | Identité', function () {
   const baseUrl = configuration.dependencies.rnipp.baseUrl;
+  nock.disableNetConnect();
   describe('#existe', function () {
     describe("si la personne n'existe pas", function () {
       it('doit renvoyer false', async function () {
         // given
-        nock(baseUrl).get('/identite?name=Dorothy').reply(404);
         const personne = { nom: 'Dorothy' };
+        nock(baseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Dorothy' })
+          .reply(404);
 
         // when
         const result = await existe(personne);
@@ -23,8 +30,14 @@ describe('Integration | Repository | Identité', function () {
     describe('si la personne existe', function () {
       it('doit renvoyer true', async function () {
         // given
-        nock(baseUrl).get('/identite?name=Elisabeth').reply(200);
         const personne = { nom: 'Elisabeth' };
+        nock(baseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Elisabeth' })
+          .reply(200);
 
         // when
         const result = await existe(personne);
@@ -37,7 +50,14 @@ describe('Integration | Repository | Identité', function () {
       it('doit lever une erreur mentionnant le temps alloué', async function () {
         // given
         const oneSecond = 1000;
-        nock(baseUrl).get('/identite?name=Elisabeth').delay(oneSecond).reply(200);
+        nock(baseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Elisabeth' })
+          .delay(oneSecond)
+          .reply(200);
         const personne = { nom: 'Elisabeth' };
 
         // when
@@ -56,8 +76,14 @@ describe('Integration | Repository | Identité', function () {
     describe(`si le RNIPP renvoie une erreur 500`, function () {
       it('doit lever une erreur contenant le code retour', async function () {
         // given
-        nock(baseUrl).get('/identite?name=Elisabeth').reply(500);
         const personne = { nom: 'Elisabeth' };
+        nock(baseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Elisabeth' })
+          .reply(500);
 
         // when
         let actual;
