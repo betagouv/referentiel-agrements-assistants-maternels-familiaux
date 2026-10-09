@@ -47,3 +47,9 @@ jobs:
         run: npm run fake:database:migrate
       - name: run tests
         run: npm run test
+      - name: start API
+        run: npm start &
+      - name: wait for API to be available
+        run: npx wait-on --timeout 2000 http://localhost:3000/api
+      - name: run end-to-end tests
+        run: npm run test:end-to-end
