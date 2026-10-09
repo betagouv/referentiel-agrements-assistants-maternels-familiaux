@@ -5,7 +5,7 @@ import nock from 'nock';
 import { configuration } from '../../../src/configuration.js';
 import { knex } from '../../../src/database/database-client.js';
 import { createServer } from '../../../src/server.js';
-describe('Integration | Route', function () {
+describe(`Integration | Route | Délivrance d'agrément`, function () {
   const baseUrl = configuration.dependencies.rnipp.baseUrl;
   describe('PUT /api/agrement', function () {
     describe("Si ni la personne, ni l'agrément n'existent", function () {

@@ -5,7 +5,7 @@ import hapiPino from 'hapi-pino';
 import hapiSwagger from 'hapi-swagger';
 
 import { configuration } from './configuration.js';
-import { routes } from './routes.js';
+import { routes } from './routes/routes.js';
 
 const createServer = async () => {
   const server = new Hapi.server({
