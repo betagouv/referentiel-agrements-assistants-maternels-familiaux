@@ -15,6 +15,16 @@ const createServer = async () => {
 
   server.route([
     {
+      method: 'GET',
+      path: '/rnipp',
+      config: {
+        auth: false,
+        handler: async (request, hapi) => {
+          return hapi.response().code(200);
+        },
+      },
+    },
+    {
       method: 'PUT',
       path: '/rnipp/identite',
       config: {

@@ -50,6 +50,10 @@ jobs:
       - name: start API
         run: npm start &
       - name: wait for API to be available
-        run: npx wait-on --timeout 2000 http://localhost:3000/api
+        run: npx wait-on --timeout 2000 http://localhost:$API_LISTENING_PORT/api
+      - name: start fake RNIPP
+        run: npm run fake:rnipp:start &
+      - name: wait for RNIPP to be available
+        run: npx wait-on --timeout 2000 $RNIPP_BASE_URL
       - name: run end-to-end tests
         run: npm run test:end-to-end
