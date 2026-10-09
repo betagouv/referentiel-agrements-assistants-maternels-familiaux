@@ -1,4 +1,5 @@
 {
   "spec": ["tests/**/*.js"],
+  "exclude": ["tests/end-to-end/**"],
   "exit": true
 }

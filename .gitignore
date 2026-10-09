@@ -41,3 +41,7 @@ jspm_packages/
 
 ## Environment variables
 .envrc
+
+# Playwright
+/test-results/
+
