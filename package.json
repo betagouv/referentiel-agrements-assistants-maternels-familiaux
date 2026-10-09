@@ -21,7 +21,8 @@
     "lint:filenames": "ls-lint",
     "lint:dependencies": "knip --no-progress",
     "start": "node --import ./instrument.cjs --no-warnings=ExperimentalWarning serve.js",
-    "test": "mocha"
+    "test": "mocha",
+    "test:end-to-end": "playwright test"
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",
@@ -39,6 +40,7 @@
     "@eslint/js": "^10.0.1",
     "@eslint/json": "^2.1.0",
     "@ls-lint/ls-lint": "^2.3.1",
+    "@playwright/test": "^1.64.0",
     "@types/node": "^26.5.0",
     "chai": "^6.2.2",
     "eslint": "^10.10.0",
