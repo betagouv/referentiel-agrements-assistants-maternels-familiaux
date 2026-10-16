@@ -17,7 +17,7 @@ const route = {
           nom: Joi.string().required(),
         },
         agrement: {
-          dateDelivrance: Joi.string().required(),
+          dateDelivrance: Joi.date().required(),
         },
       }),
     },

@@ -16,7 +16,7 @@ test.describe('/api/agrement endpoint', () => {
       const response = await request.put(`/api/agrement`, {
         data: {
           personne: { nom: 'Jane' },
-          agrement: { dateDelivrance: '2026-10-02' },
+          agrement: { dateDelivrance: '2026-10-02Z' },
         },
       });
 
@@ -29,7 +29,7 @@ test.describe('/api/agrement endpoint', () => {
 
       const agrements = await knex('agrement').where({ nom: 'Jane' });
       expect(agrements.length).to.equal(1);
-      expect(agrements[0].dateDeDelivrance.toDateString()).to.equal(new Date('2026-10-02').toDateString());
+      expect(agrements[0]).to.deep.equal({ nom: 'Jane', dateDeDelivrance: new Date('2026-10-02Z') });
     });
   });
 });
