@@ -1,5 +1,7 @@
 import Joi from 'joi';
 
+import * as agrementRepository from '../../src/repositories/agrement-repository.js';
+
 const route = {
   method: 'PUT',
   path: '/api/historique-candidat',
@@ -14,15 +16,14 @@ const route = {
     },
   },
   handler: async (request, hapi) => {
-    let agrements;
-    if (request.payload.nom === 'Dorothy') {
-      agrements = [{ type: 'familial', dateDeDelivrance: '2003-01-01' }];
-    } else {
-      agrements = [];
-    }
+    const agrementsFamiliaux = await agrementRepository.rechercher({ nom: request.payload.nom });
+    const foo = agrementsFamiliaux.map((agrement) => ({
+      type: 'familial',
+      dateDeDelivrance: agrement.dateDeDelivrance,
+    }));
     return hapi
       .response({
-        agrements,
+        agrements: foo,
       })
       .code(200);
   },
