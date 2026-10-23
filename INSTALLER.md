@@ -60,9 +60,20 @@ Démarrer la base de données.
 docker compose up --detach --wait
 ```
 
+Créer le schéma et les jeux de données
+```shell
+npm run database:migrate
+npm run database:seed
+```
+
 Démarrer l'application.
 ```shell
 npm start
+```
+
+Appeler le healthcheck
+```shell
+curl http://localhost:3000/api
 ```
 
 Parcourir les routes disponibles [avec Swagger](http://localhost:3000/documentation).
