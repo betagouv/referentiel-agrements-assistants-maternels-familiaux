@@ -14,10 +14,15 @@ export DATABASE_URL=postgresql://postgres:password@localhost
 # Dependencies
 # =========
 
+# RNIPP
 export RNIPP_BASE_URL=$URL
 
 export RNIPP_TIMEOUT_MILLISECONDS=500
 
+# PAJEMPLOI
+export PAJEMPLOI_BASE_URL=$URL
+
+export PAJEMPLOI_TIMEOUT_MILLISECONDS=500
 
 # =========
 # Fake
