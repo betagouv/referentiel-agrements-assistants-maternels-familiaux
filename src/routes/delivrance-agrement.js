@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import * as agrementRepository from '../repositories/agrement-repository.js';
+import * as agrementRepository from '../repositories/agrement-familial-repository.js';
 import * as identiteRepository from '../repositories/identite-repository.js';
 import * as personneRepository from '../repositories/personne-repository.js';
 
