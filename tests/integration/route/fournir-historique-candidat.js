@@ -59,5 +59,22 @@ describe(`Integration | Route | Historique du candidat`, function () {
         });
       });
     });
+    describe("Si le candidat a un agrément d'assistant maternel", function () {
+      it('doit retourner cet agrément', async function () {
+        // given
+        const payload = { nom: 'Jane' };
+        const server = await createServer();
+        const query = { method: 'PUT', url: '/api/historique-candidat', payload };
+
+        // when
+        const response = await server.inject(query);
+
+        // then
+        const actual = JSON.parse(response.payload);
+        expect(actual).to.deep.equal({
+          agrements: [{ type: 'maternel', dateDeDelivrance: '2003-01-01T00:00:00.123Z' }],
+        });
+      });
+    });
   });
 });
