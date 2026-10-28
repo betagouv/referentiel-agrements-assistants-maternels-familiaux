@@ -12,6 +12,10 @@ const schema = Joi.object({
       baseUrl: Joi.string().uri().required(),
       timeout: Joi.number().integer().min(1).max(60000).required(),
     },
+    pajemploi: {
+      baseUrl: Joi.string().uri().required(),
+      timeout: Joi.number().integer().min(1).max(60000).required(),
+    },
   },
 }).options({ allowUnknown: false });
 
@@ -25,6 +29,10 @@ const configuration = {
     rnipp: {
       baseUrl: process.env.RNIPP_BASE_URL,
       timeout: parseInt(process.env.RNIPP_TIMEOUT_MILLISECONDS),
+    },
+    pajemploi: {
+      baseUrl: process.env.PAJEMPLOI_BASE_URL,
+      timeout: parseInt(process.env.PAJEMPLOI_TIMEOUT_MILLISECONDS),
     },
   },
 };
