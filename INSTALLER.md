@@ -60,10 +60,9 @@ Démarrer la base de données.
 docker compose up --detach --wait
 ```
 
-Créer le schéma et les jeux de données
+Créer le schéma.
 ```shell
 npm run database:migrate
-npm run database:seed
 ```
 
 Démarrer l'application.
@@ -77,6 +76,40 @@ curl http://localhost:3000/api
 ```
 
 Parcourir les routes disponibles [avec Swagger](http://localhost:3000/documentation).
+
+## Tester en local
+
+### Jeux de données
+
+Créer le jeu de donnée.
+```shell
+npm run database:seed
+```
+
+### Simuler les dépendances
+
+L'application est cliente du RNIPP.
+Pour effectuer des tests en local, sans disposer de connexion au RNIPP, vous pouvez utiliser le fake.
+Il dispose [de données de test](./tests/fake/seeds/person.js).
+
+Démarrez-le.
+```shell
+npm run fake:database:migrate
+npm run fake:database:seed
+npm run fake:rnipp:start
+```
+
+Vérifiez qu'il répond par une 200.
+```shell
+curl -i \
+  --header "Content-Type: application/json" \
+  --request PUT \
+  --data '{"nom":"Dorothy"}' \
+  "http://localhost:3001/rnipp/person"
+```
+
+Le fake fait l'objet de tests automatisés en local et sur la CI, mais n'est pas disponible sur le PaaS.
+Pour cela, il faudrait soit ajouter un nginx devant, soit créer une application séparée, Scalingo n'acceptant qu'un conteneur web par [Procfile](Procfile).
 
 ## Développer
 
@@ -97,8 +130,22 @@ Dans l'environnement d'exécution Mocha, ajouter l'option `--exit`, présente da
 
 ### Créer une migration
 
+Pour l'application.
 ```shell
 npx knex --cwd ./src/database migrate:make $NOM_MIGRATION
+```
+
+Pour les fakes.
+```shell
+npx knex --cwd ./tests/fake/database migrate:make $NOM_MIGRATION
+```
+
+
+### Supprimer le schéma
+
+Pour supprimer les tables et les données de test.
+```shell
+docker compose down --volumes
 ```
 
 ## Tester sur Github
@@ -156,38 +203,3 @@ Pour tester, appeler la route non authentifiée `/api/error`.
 ```shell
 curl -i "http://localhost:3000/api/error"
 ```
-
-## Simuler le RNIPP
-
-L'application est cliente du RNIPP. 
-Pour effectuer des tests en local, sans disposer de connexion au RNIPP, vous pouvez utiliser le fake.
-Il dispose [de données de test](./tests/fake/seeds/person.js). 
-
-Démarrez-le.
-```shell
-npm run fake:database:migrate
-npm run fake:database:seed
-npm run fake:rnipp:start
-```
-
-Vérifiez qu'il répond par une 200.
-```shell
-curl -i \
-  --header "Content-Type: application/json" \
-  --request PUT \
-  --data '{"nom":"Dorothy"}' \
-  "http://localhost:3001/rnipp/person"
-```
-
-Pour supprimer les tables et données de test
-```shell
-docker compose down --volumes
-```
-
-Pour créer une migration
-```shell
-npx knex --cwd ./tests/fake/database migrate:make $NOM_MIGRATION
-```
-
-Le fake fait l'objet de tests automatisés en local et sur la CI, mais n'est pas disponible sur le PaaS.
-Pour cela, il faudrait soit ajouter un nginx devant, soit créer une application séparée, Scalingo n'acceptant qu'un conteneur web par [Procfile](Procfile).
