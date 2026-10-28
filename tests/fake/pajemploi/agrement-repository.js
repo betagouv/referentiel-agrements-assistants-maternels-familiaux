@@ -1,8 +1,12 @@
 import { knex } from '../database/database-client.js';
 
-const get = async ({ nom }) => {
-  const row = await knex.withSchema('pajemploi').select().table('agrement').where({ nom }).first();
+const rechercher = async ({ nom }) => {
+  const row = await knex
+    .withSchema('pajemploi')
+    .select('dateDeDelivrance', 'departementDeDelivrance')
+    .table('agrement')
+    .where({ nom });
   return row;
 };
 
-export { get };
+export { rechercher };
