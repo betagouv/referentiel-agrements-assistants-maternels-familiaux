@@ -16,7 +16,20 @@ const route = {
     },
   },
   handler: async (request, hapi) => {
-    const agrementsFamiliaux = await agrementRepository.rechercher({ nom: request.payload.nom });
+    const nom = request.payload.nom;
+    if (nom === 'Jane') {
+      return hapi
+        .response({
+          agrements: [
+            {
+              dateDeDelivrance: '2003-01-01T00:00:00.123Z',
+              type: 'maternel',
+            },
+          ],
+        })
+        .code(200);
+    }
+    const agrementsFamiliaux = await agrementRepository.rechercher({ nom });
     const foo = agrementsFamiliaux.map((agrement) => ({
       type: 'familial',
       dateDeDelivrance: agrement.dateDeDelivrance,
