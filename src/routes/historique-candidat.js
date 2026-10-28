@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
-import * as agrementRepository from '../repositories/agrement-familial-repository.js';
+import * as agrementFamilialRepository from '../repositories/agrement-familial-repository.js';
+import * as agrementMaternelRepository from '../repositories/agrement-maternel-repository.js';
 
 const route = {
   method: 'PUT',
@@ -17,26 +18,21 @@ const route = {
   },
   handler: async (request, hapi) => {
     const nom = request.payload.nom;
-    if (nom === 'Jane') {
-      return hapi
-        .response({
-          agrements: [
-            {
-              dateDeDelivrance: '2003-01-01T00:00:00.123Z',
-              type: 'maternel',
-            },
-          ],
-        })
-        .code(200);
-    }
-    const agrementsFamiliaux = await agrementRepository.rechercher({ nom });
-    const foo = agrementsFamiliaux.map((agrement) => ({
-      type: 'familial',
-      dateDeDelivrance: agrement.dateDeDelivrance,
-    }));
+    const agrementsMaternels = await agrementMaternelRepository.rechercher({ nom });
+    const agrementsFamiliaux = await agrementFamilialRepository.rechercher({ nom });
     return hapi
       .response({
-        agrements: foo,
+        agrements: [
+          ...agrementsFamiliaux.map((agrement) => ({
+            type: 'familial',
+            dateDeDelivrance: agrement.dateDeDelivrance,
+          })),
+          ...agrementsMaternels.map((agrement) => ({
+            type: 'maternel',
+            dateDeDelivrance: agrement.dateDeDelivrance,
+            departementDeDelivrance: agrement.departementDeDelivrance,
+          })),
+        ],
       })
       .code(200);
   },
