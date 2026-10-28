@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import * as agrementRepository from '../../src/repositories/agrement-repository.js';
+import * as agrementRepository from '../repositories/agrement-familial-repository.js';
 
 const route = {
   method: 'PUT',
