@@ -2,7 +2,7 @@ import Hapi from '@hapi/hapi';
 import Joi from 'joi';
 
 import { configuration } from '../configuration.js';
-import { get } from './agrement-repository.js';
+import { rechercher } from './agrement-repository.js';
 
 const createServer = async () => {
   const server = new Hapi.server({
@@ -23,11 +23,14 @@ const createServer = async () => {
           }),
         },
         handler: async (request, hapi) => {
-          const agrement = await get({ nom: request.payload.nom });
-          if (agrement) {
-            return agrement;
-          }
-          return hapi.response().code(404);
+          const agrements = await rechercher({ nom: request.payload.nom });
+          const response = JSON.stringify({
+            agrements: agrements.map((agrement) => ({
+              delivreLe: agrement.dateDeDelivrance,
+              delivrePar: agrement.departementDeDelivrance,
+            })),
+          });
+          return hapi.response(response).code(200);
         },
       },
     },

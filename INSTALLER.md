@@ -92,10 +92,19 @@ L'application est cliente du RNIPP.
 Pour effectuer des tests en local, sans disposer de connexion au RNIPP, vous pouvez utiliser le fake.
 Il dispose [de données de test](./tests/fake/seeds/person.js).
 
-Démarrez-le.
+Créez le schéma et les jeux de données.
 ```shell
 npm run fake:database:migrate
 npm run fake:database:seed
+```
+
+Vérifiez les données créées.
+```shell
+psql --host localhost --username postgres --command="select * from pajemploi.agrement"
+```
+
+Démarrez le fake. 
+```
 npm run fake:rnipp:start
 ```
 

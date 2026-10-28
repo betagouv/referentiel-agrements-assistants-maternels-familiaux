@@ -6,8 +6,9 @@ const seed = async () => {
     .withSchema('pajemploi')
     .table('agrement')
     .insert([
-      { nom: 'Dorothy', type: 'maternel' },
-      { nom: 'Elisabeth', type: 'maternel' },
+      { nom: 'Dorothy', dateDeDelivrance: new Date('2003-01-01Z'), departementDeDelivrance: '59' },
+      { nom: 'Dorothy', dateDeDelivrance: new Date('2026-01-01Z'), departementDeDelivrance: '62' },
+      { nom: 'Elisabeth', dateDeDelivrance: new Date('2003-01-01Z'), departementDeDelivrance: '62' },
     ]);
 };
 
