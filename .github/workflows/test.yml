@@ -57,5 +57,9 @@ jobs:
         run: npm run fake:rnipp:start &
       - name: wait for RNIPP to be available
         run: npx wait-on --timeout 2000 $RNIPP_BASE_URL
+      - name: start fake Pajemploi
+        run: npm run fake:pajemploi:start &
+      - name: wait for Pajemploi to be available
+        run: npx wait-on --timeout 2000 $PAJEMPLOI_BASE_URL
       - name: run end-to-end tests
         run: npm run test:end-to-end

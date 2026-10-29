@@ -11,6 +11,16 @@ const createServer = async () => {
 
   server.route([
     {
+      method: 'GET',
+      path: '/pajemploi',
+      config: {
+        auth: false,
+        handler: async (request, hapi) => {
+          return hapi.response().code(200);
+        },
+      },
+    },
+    {
       method: 'PUT',
       path: '/pajemploi/agrement',
       config: {

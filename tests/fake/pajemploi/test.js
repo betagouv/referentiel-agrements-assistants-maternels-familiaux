@@ -5,7 +5,20 @@ import { knex } from '../database/database-client.js';
 import { createServer } from './server.js';
 
 describe('Integration | Fake | Pajemploi', function () {
-  describe('PUT /agrement', function () {
+  describe('GET /pajemploi', function () {
+    it('should return 200 (OK)', async function () {
+      // given
+      const server = await createServer();
+
+      // when
+      const query = { method: 'GET', url: '/pajemploi' };
+      const { statusCode } = await server.inject(query);
+
+      // then
+      expect(statusCode).to.equal(StatusCodes.OK);
+    });
+  });
+  describe('PUT /pajemploi/agrement', function () {
     describe('si la personne a deux agréments', function () {
       it('doit retourner OK (200)', async function () {
         // given
