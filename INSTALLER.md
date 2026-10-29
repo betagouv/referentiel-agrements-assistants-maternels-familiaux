@@ -103,22 +103,29 @@ Vérifiez les données créées.
 psql --host localhost --username postgres --command="select * from pajemploi.agrement"
 ```
 
-Démarrez le fake. 
-```
+Démarrez les fakes. 
+```shell
 npm run fake:rnipp:start
+npm run fake:pajemploi:start
 ```
 
-Vérifiez qu'il répond par une 200.
+Vérifiez qu'ils répondent par une 200.
 ```shell
 curl -i \
   --header "Content-Type: application/json" \
   --request PUT \
   --data '{"nom":"Dorothy"}' \
   "http://localhost:3001/rnipp/person"
+  
+curl -i \
+  --header "Content-Type: application/json" \
+  --request PUT \
+  --data '{"nom":"Dorothy"}' \
+  "http://localhost:3002/pajemploi/agrement"
 ```
 
-Le fake fait l'objet de tests automatisés en local et sur la CI, mais n'est pas disponible sur le PaaS.
-Pour cela, il faudrait soit ajouter un nginx devant, soit créer une application séparée, Scalingo n'acceptant qu'un conteneur web par [Procfile](Procfile).
+Les fakes font l'objet de tests automatisés en local et sur la CI, mais ne sont pas disponibles sur le PaaS.
+Il faudrait soit ajouter un nginx devant, soit créer une application séparée, Scalingo n'acceptant qu'un conteneur web par [Procfile](Procfile).
 
 ## Développer
 
