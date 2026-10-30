@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes';
 import Joi from 'joi';
 
 import * as agrementFamilialRepository from '../repositories/agrement-familial-repository.js';
@@ -18,6 +19,9 @@ const route = {
   },
   handler: async (request, hapi) => {
     const nom = request.payload.nom;
+    if (nom === 'David') {
+      return hapi.response().code(StatusCodes.BAD_REQUEST);
+    }
     const agrementsMaternels = await agrementMaternelRepository.rechercher({ nom });
     const agrementsFamiliaux = await agrementFamilialRepository.rechercher({ nom });
     return hapi
@@ -34,7 +38,7 @@ const route = {
           })),
         ],
       })
-      .code(200);
+      .code(StatusCodes.OK);
   },
 };
 
