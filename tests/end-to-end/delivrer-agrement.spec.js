@@ -29,7 +29,11 @@ test.describe('End-to-end | Route | /api/agrement', () => {
 
       const agrements = await knex('agrement').where({ nom: 'Jane' });
       expect(agrements.length).to.equal(1);
-      expect(agrements[0]).to.deep.equal({ nom: 'Jane', dateDeDelivrance: new Date('2026-10-02Z') });
+      expect(agrements[0]).to.deep.equal({
+        nom: 'Jane',
+        departementDeDelivrance: '59',
+        dateDeDelivrance: new Date('2026-10-02Z'),
+      });
     });
   });
 });

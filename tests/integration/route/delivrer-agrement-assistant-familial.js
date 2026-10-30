@@ -51,7 +51,7 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
           // then
           expect(actual.length).to.equal(1);
         });
-        it("doit persister l'agrément", async function () {
+        it("doit persister l'agrément, sur le département lié à l'utilisateur", async function () {
           // given
           nock(baseUrl, {
             reqheaders: {
@@ -64,14 +64,18 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
           await knex.table('personne').truncate();
           const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: new Date('2003-01-01Z') } };
           const server = await createServer();
-          const query = { method: 'PUT', url: '/api/agrement', payload };
+          const query = { method: 'PUT', url: '/api/agrement', payload, headers: { userId: 1 } };
 
           // when
           await server.inject(query);
           const agrements = await knex('agrement').where({ nom: 'Dorothy' });
 
           // then
-          expect(agrements[0]).to.deep.equal({ nom: 'Dorothy', dateDeDelivrance: new Date('2003-01-01Z') });
+          expect(agrements[0]).to.deep.equal({
+            nom: 'Dorothy',
+            dateDeDelivrance: new Date('2003-01-01Z'),
+            departementDeDelivrance: '59',
+          });
         });
       });
       describe("Si l'identité de la personne n'est pas valide", function () {

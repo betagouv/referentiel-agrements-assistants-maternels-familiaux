@@ -1,7 +1,8 @@
 import { knex } from '../database/database-client.js';
 
 const persister = async ({ nom, dateDeDelivrance }) => {
-  await knex.table('agrement').insert({ nom, dateDeDelivrance });
+  const departementDeDelivrance = '59';
+  await knex.table('agrement').insert({ nom, dateDeDelivrance, departementDeDelivrance });
 };
 
 const rechercher = async ({ nom }) => {

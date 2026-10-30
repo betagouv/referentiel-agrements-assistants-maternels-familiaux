@@ -18,7 +18,11 @@ describe('Integration | Repository | agrément', function () {
         // then
         expect(result.length).to.equal(1);
         const actual = result[0];
-        expect(actual).to.deep.equal({ nom: 'Dorothy', dateDeDelivrance: new Date('2003-01-01Z') });
+        expect(actual).to.deep.equal({
+          nom: 'Dorothy',
+          departementDeDelivrance: '59',
+          dateDeDelivrance: new Date('2003-01-01Z'),
+        });
       });
     });
   });
