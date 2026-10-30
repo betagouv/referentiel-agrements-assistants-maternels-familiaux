@@ -6,7 +6,7 @@ const up = async (knex) => {
 
 const down = async (knex) => {
   await knex.schema.withSchema('pajemploi').table('agrement', (table) => {
-    table.text('departementDeDelivrance');
+    table.dropColumn('departementDeDelivrance');
   });
 };
 
