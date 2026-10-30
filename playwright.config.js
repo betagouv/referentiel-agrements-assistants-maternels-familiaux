@@ -5,4 +5,5 @@ export default defineConfig({
     baseURL: 'http://localhost:3000',
   },
   reporter: 'list',
+  workers: 1,
 });
