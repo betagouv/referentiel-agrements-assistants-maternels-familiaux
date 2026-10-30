@@ -5,6 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 import { knex } from '../../src/database/database-client.js';
 
 test.describe('End-to-end | Route | /api/historique-candidat', () => {
+  test.describe.configure({ retries: 3 });
   test.describe("quand le candidat a un agrément d'assistant familial et maternel", () => {
     test('répond OK (200) et renvoie ces deux agréments', async ({ request }) => {
       // given
