@@ -8,10 +8,13 @@ participant gestion_dossier
 
 participant référentiel_agréments_api
 participant référentiel_agréments_bdd
+participant RNIPP
 participant Pajemploi
 
 assistant -> démarche_simplifiée : demande d'agrément
 démarche_simplifiée -> référentiel_agréments_api : historique de la personne
+référentiel_agréments_api -> RNIPP: la personne existe-t-elle ?
+RNIPP -> référentiel_agréments_api: la personne existe
 référentiel_agréments_api -> Pajemploi : historique de la personne \n assistant maternel
 Pajemploi -> référentiel_agréments_api : agrément(s) sans retrait
 référentiel_agréments_api -> référentiel_agréments_bdd : historique de la personne \n assistant familial

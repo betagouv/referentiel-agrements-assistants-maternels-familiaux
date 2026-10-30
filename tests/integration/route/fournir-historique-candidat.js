@@ -8,6 +8,22 @@ import { createServer } from '../../../src/server.js';
 describe(`Integration | Route | Historique du candidat`, function () {
   const baseUrl = configuration.dependencies.pajemploi.baseUrl;
   describe('PUT /api/historique-candidat', function () {
+    describe("Si l'identité du candidat n'est pas connue", function () {
+      it('doit retourner BAD_REQUEST (400)', async function () {
+        // given
+        await knex.table('agrement').truncate();
+        await knex.table('personne').truncate();
+        const payload = { nom: 'David' };
+        const server = await createServer();
+        const query = { method: 'PUT', url: '/api/historique-candidat', payload };
+
+        // when
+        const response = await server.inject(query);
+
+        // then
+        expect(response.statusCode).to.equal(StatusCodes.BAD_REQUEST);
+      });
+    });
     describe("Si le candidat n'a aucun agrément", function () {
       it('doit retourner OK (200)', async function () {
         // given
