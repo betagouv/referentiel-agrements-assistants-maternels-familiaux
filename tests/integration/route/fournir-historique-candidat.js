@@ -6,11 +6,20 @@ import { configuration } from '../../../src/configuration.js';
 import { knex } from '../../../src/database/database-client.js';
 import { createServer } from '../../../src/server.js';
 describe(`Integration | Route | Historique du candidat`, function () {
-  const baseUrl = configuration.dependencies.pajemploi.baseUrl;
+  const pajemploiBaseUrl = configuration.dependencies.pajemploi.baseUrl;
+  const rnippBaseUrl = configuration.dependencies.rnipp.baseUrl;
   describe('PUT /api/historique-candidat', function () {
     describe("Si l'identité du candidat n'est pas connue", function () {
       it('doit retourner BAD_REQUEST (400)', async function () {
         // given
+        nock(rnippBaseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'David' })
+          .reply(StatusCodes.NOT_FOUND);
+
         await knex.table('agrement').truncate();
         await knex.table('personne').truncate();
         const payload = { nom: 'David' };
@@ -23,11 +32,42 @@ describe(`Integration | Route | Historique du candidat`, function () {
         // then
         expect(response.statusCode).to.equal(StatusCodes.BAD_REQUEST);
       });
+      it('doit retourner la raison en payload', async function () {
+        // given
+        nock(rnippBaseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'David' })
+          .reply(StatusCodes.NOT_FOUND);
+
+        await knex.table('agrement').truncate();
+        await knex.table('personne').truncate();
+        const payload = { nom: 'David' };
+        const server = await createServer();
+        const query = { method: 'PUT', url: '/api/historique-candidat', payload };
+
+        // when
+        const response = await server.inject(query);
+
+        // then
+        const actual = response.payload;
+        const expected = JSON.stringify({ cause: "L'identité du demandeur doit être connue dans le RNIPP" });
+        expect(actual).to.deep.equal(expected);
+      });
     });
     describe("Si le candidat n'a aucun agrément", function () {
       it('doit retourner OK (200)', async function () {
         // given
-        nock(baseUrl, {
+        nock(rnippBaseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Dorothy' })
+          .reply(StatusCodes.OK);
+        nock(pajemploiBaseUrl, {
           reqheaders: {
             'Content-Type': 'application/json',
           },
@@ -48,7 +88,14 @@ describe(`Integration | Route | Historique du candidat`, function () {
       });
       it("doit retourner une liste d'agréments vide", async function () {
         // given
-        nock(baseUrl, {
+        nock(rnippBaseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Jack' })
+          .reply(StatusCodes.OK);
+        nock(pajemploiBaseUrl, {
           reqheaders: {
             'Content-Type': 'application/json',
           },
@@ -74,7 +121,14 @@ describe(`Integration | Route | Historique du candidat`, function () {
     describe("Si le candidat a un agrément d'assistant familial", function () {
       it('doit retourner cet agrément', async function () {
         // given
-        nock(baseUrl, {
+        nock(rnippBaseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Dorothy' })
+          .reply(StatusCodes.OK);
+        nock(pajemploiBaseUrl, {
           reqheaders: {
             'Content-Type': 'application/json',
           },
@@ -102,8 +156,15 @@ describe(`Integration | Route | Historique du candidat`, function () {
     describe("Si le candidat a un agrément d'assistant maternel", function () {
       it('doit retourner cet agrément', async function () {
         // given
+        nock(rnippBaseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Elisabeth' })
+          .reply(StatusCodes.OK);
         const nockedResponse = { agrements: [{ delivreLe: new Date('2003-01-01Z'), delivrePar: 59 }] };
-        nock(baseUrl, {
+        nock(pajemploiBaseUrl, {
           reqheaders: {
             'Content-Type': 'application/json',
           },

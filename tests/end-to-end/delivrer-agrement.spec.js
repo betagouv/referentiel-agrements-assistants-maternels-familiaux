@@ -3,7 +3,7 @@ import { expect } from 'chai';
 
 import { knex } from '../../src/database/database-client.js';
 
-test.describe('/api/agrement endpoint', () => {
+test.describe('End-to-end | Route | /api/agrement', () => {
   test.describe("quand l'identité de la personne est valide", () => {
     test("répond OK (200), persiste l'agrément et la personne", async ({ request }) => {
       // given
