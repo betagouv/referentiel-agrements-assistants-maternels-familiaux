@@ -14,16 +14,19 @@ const createServer = async () => {
 
   server.route(routes);
 
+  // https://github.com/hapi-swagger/hapi-swagger/issues/668
+  const swaggerOptions = {
+    info: {
+      title: 'Référentiel national des agréments',
+    },
+    uiOptions: { defaultModelsExpandDepth: -1 },
+  };
   const swaggerPlugins = [
     hapiInert,
     hapiVision,
     {
       plugin: hapiSwagger,
-      options: {
-        info: {
-          title: 'Référentiel national des agréments',
-        },
-      },
+      swaggerOptions,
     },
   ];
 
