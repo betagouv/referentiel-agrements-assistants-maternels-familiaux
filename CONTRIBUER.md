@@ -2,15 +2,21 @@
 
 Chaque modification est effectuée sur une branche :
 - partant de la branche par défaut du repository;
-- son nom est en français.
+- son nom est en français;
+- son nom commence par un verbe;
+- son nom ne comporte aucun espace, ni caractère accentué.
+
+Ex: `tracer-consultation-historique-agrement`.
 
 Sur une branche, la modification est effectuée : 
 - avec des commits atomiques ;
 - dont le nom respecte la convention [conventional commit](https://www.conventionalcommits.org).
 
+Ex: `feat(api): lier l'utilisateur à un département`.
+
 La modification est testée automatiquement.
 
-Elle est soumise par une Pull request, rédigée en français.
+Elle est soumise par une Pull request, rédigée en français, [en suivant le template](./.github/pull_request_template.md).
 
 La Pull request exécute automatiquement les tests automatisés (CI) avec Github Actions.
 
@@ -21,7 +27,7 @@ L'intégration des modifications (merge de la Pull Request) :
 - a pour pré-requis le passage des tests automatisés avec succès ;
 - préserve les commits (no squash).
 
-## backend
+## Backend
 
 Les dépendances sont toutes déclarées, et toutes les dépendances déclarées sont utilisées [(référence)](knip.json).
 
@@ -41,6 +47,14 @@ Les règles de lint suivent le set `recommended`, et quelques règles supplémen
 - [code Yaml](https://ota-meshi.github.io/eslint-plugin-yml/rules/).
 
 La configuration est passé aux CLI utilisé par  `npm` par des dotfile plutôt que par des options, par exemple [.mocharc.json](.mocharc.json).
+
+### Langue, encodage, casse
+
+Le nom des variables, fonctions, des tests (bref, tout sauf le langage de programmation) sera en français.
+
+Le nom des fichiers et des dossiers sera de préférence en `kebab-case`, sans espace, [sauf exception](.ls-lint.yml) imposée par une librairie. Leur encodage sera en UTF-8.
+
+Le nom des variables et des fonctions ne comportera pas de caractères accentués ou spéciaux. Par contre, utilisez les caractères accentués dans les descriptions de test (ex: `describe("si l'utilisateur est identifié")`).
 
 ### Tests automatisés
 
