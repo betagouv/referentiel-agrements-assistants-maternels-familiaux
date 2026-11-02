@@ -1,8 +1,10 @@
+import { StatusCodes } from 'http-status-codes';
 import Joi from 'joi';
 
 import * as agrementRepository from '../repositories/agrement-familial-repository.js';
 import * as identiteRepository from '../repositories/identite-repository.js';
 import * as personneRepository from '../repositories/personne-repository.js';
+import * as utilisateurRepository from '../repositories/utilisateur-repository.js';
 
 const route = {
   method: 'PUT',
@@ -20,8 +22,25 @@ const route = {
           dateDelivrance: Joi.date().required(),
         },
       }),
+      headers: Joi.object({
+        userid: Joi.string().optional(),
+      }),
+      options: {
+        allowUnknown: true,
+      },
     },
     handler: async (request, hapi) => {
+      const identifiant = request.headers.userid;
+
+      if (identifiant === undefined) {
+        return hapi.response().code(StatusCodes.UNAUTHORIZED);
+      }
+
+      const departement = await utilisateurRepository.rechercher({ identifiant });
+      if (!departement) {
+        return hapi.response().code(StatusCodes.FORBIDDEN);
+      }
+
       const nom = request.payload.personne.nom;
       const lIdentiteDeLaPersonneEstValide = await identiteRepository.existe({ nom });
       if (lIdentiteDeLaPersonneEstValide) {
