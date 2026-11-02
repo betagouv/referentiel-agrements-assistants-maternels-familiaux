@@ -36,8 +36,8 @@ const route = {
         return hapi.response().code(StatusCodes.UNAUTHORIZED);
       }
 
-      const departement = await utilisateurRepository.rechercher({ identifiant });
-      if (!departement) {
+      const utilisateur = await utilisateurRepository.rechercher({ identifiant });
+      if (utilisateur === undefined) {
         return hapi.response().code(StatusCodes.FORBIDDEN);
       }
 
@@ -49,6 +49,7 @@ const route = {
         await agrementRepository.persister({
           nom,
           dateDeDelivrance,
+          departementDeDelivrance: utilisateur.departement,
         });
         return hapi.response().code(200);
       } else {

@@ -9,7 +9,7 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
   const baseUrl = configuration.dependencies.rnipp.baseUrl;
   describe('PUT /api/agrement', function () {
     describe("Si l'utilisateur est autorisé", function () {
-      const utilisateur = { identifiant: '1', departement: '59' };
+      const utilisateur = { identifiant: '1', departement: '62' };
       const headers = { userId: utilisateur.identifiant };
       beforeEach(async function () {
         await knex.table('utilisateur').truncate();
@@ -26,8 +26,9 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
             })
               .put('/identite', { nom: 'Dorothy' })
               .reply(200);
-            const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
+
             const server = await createServer();
+            const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
             const query = { method: 'PUT', url: '/api/agrement', payload, headers };
 
             // when
@@ -75,13 +76,13 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
 
             // when
             await server.inject(query);
-            const agrements = await knex('agrement').where({ nom: 'Dorothy' });
+            const agrement = await knex('agrement').where({ nom: 'Dorothy' }).first();
 
             // then
-            expect(agrements[0]).to.deep.equal({
+            expect(agrement).to.deep.equal({
               nom: 'Dorothy',
               dateDeDelivrance: new Date('2003-01-01Z'),
-              departementDeDelivrance: '59',
+              departementDeDelivrance: '62',
             });
           });
         });
