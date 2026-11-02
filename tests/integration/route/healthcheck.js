@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { createServer } from '../../../src/server.js';
 
-describe('Integration | Route | Healthcheck', function () {
+describe('Intégration | Route | Healthcheck', function () {
   describe('GET /api', function () {
     describe('if the server if properly configured', function () {
       it('should return OK (200)', async function () {

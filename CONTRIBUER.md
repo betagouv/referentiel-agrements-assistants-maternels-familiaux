@@ -40,4 +40,27 @@ Les règles de lint suivent le set `recommended`, et quelques règles supplémen
 - [sécurité Node](https://eslint.interlace.tools/docs/security/plugin-node-security/) - set `strict`;
 - [code Yaml](https://ota-meshi.github.io/eslint-plugin-yml/rules/).
 
-La configuration est passé aux CLI utilisé par  `npm` par des dotfile plutôt que par des options, par exemple [.mocharc.json](.mocharc.json).  
+La configuration est passé aux CLI utilisé par  `npm` par des dotfile plutôt que par des options, par exemple [.mocharc.json](.mocharc.json).
+
+### Tests automatisés
+
+Les tests sont découpés en [3 sections](http://xunitpatterns.com/Four%20Phase%20Test.html), explicités avec des commentaires.
+```js
+it('doit retourner BAD_REQUEST (400)', async function () {
+    // given
+    
+    // when 
+    
+    // then
+})
+```
+
+Pour faciliter la lecture des compte-rendus d'exécution, le contenu du fichier de test est une section contenant :
+- le type de test (unitaire, intégration, bout-en-bout);
+- le type de composant testé (route, repository);
+- le nom du composant.
+```js
+describe(`Intégration | Route | Délivrance d'agrément`, function () {
+  
+})
+```

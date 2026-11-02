@@ -4,7 +4,7 @@ import nock from 'nock';
 import { configuration } from '../../../src/configuration.js';
 import { existe } from '../../../src/repositories/identite-repository.js';
 
-describe('Integration | Repository | Identité', function () {
+describe('Intégration | Repository | Identité', function () {
   const baseUrl = configuration.dependencies.rnipp.baseUrl;
   nock.disableNetConnect();
   describe('#existe', function () {

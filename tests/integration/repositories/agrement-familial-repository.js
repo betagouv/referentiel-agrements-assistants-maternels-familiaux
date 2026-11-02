@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { knex } from '../../../src/database/database-client.js';
 import { persister, rechercher } from '../../../src/repositories/agrement-familial-repository.js';
 
-describe("Integration | Repository | Agrément d'assistant familial", function () {
+describe("Intégration | Repository | Agrément d'assistant familial", function () {
   describe('#persister', function () {
     describe("si l'agrément n'existe pas", function () {
       it('doit le persister', async function () {
