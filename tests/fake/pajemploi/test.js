@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { knex } from '../database/database-client.js';
 import { createServer } from './server.js';
 
-describe('Integration | Fake | Pajemploi', function () {
+describe('Intégration | Fake | Pajemploi', function () {
   describe('GET /pajemploi', function () {
     it('should return 200 (OK)', async function () {
       // given

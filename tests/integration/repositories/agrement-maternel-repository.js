@@ -4,7 +4,7 @@ import nock from 'nock';
 import { configuration } from '../../../src/configuration.js';
 import { rechercher } from '../../../src/repositories/agrement-maternel-repository.js';
 
-describe("Integration | Repository | Agrément d'assistant maternel", function () {
+describe("Intégration | Repository | Agrément d'assistant maternel", function () {
   const baseUrl = configuration.dependencies.pajemploi.baseUrl;
   nock.disableNetConnect();
   describe('#rechercher', function () {

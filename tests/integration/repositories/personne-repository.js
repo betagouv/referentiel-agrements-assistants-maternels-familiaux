@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { knex } from '../../../src/database/database-client.js';
 import { persister } from '../../../src/repositories/personne-repository.js';
 
-describe('Integration | Repository | personne', function () {
+describe('Intégration | Repository | personne', function () {
   describe('#persister', function () {
     describe("si la personne n'existe pas", function () {
       it('doit la persister', async function () {

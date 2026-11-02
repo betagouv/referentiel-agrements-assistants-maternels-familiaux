@@ -5,7 +5,7 @@ import nock from 'nock';
 import { configuration } from '../../../src/configuration.js';
 import { knex } from '../../../src/database/database-client.js';
 import { createServer } from '../../../src/server.js';
-describe(`Integration | Route | Délivrance d'agrément`, function () {
+describe(`Intégration | Route | Délivrance d'agrément`, function () {
   const baseUrl = configuration.dependencies.rnipp.baseUrl;
   describe('PUT /api/agrement', function () {
     describe("Si l'utilisateur est autorisé", function () {
@@ -157,17 +157,9 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
     describe("Si l'utilisateur n'est pas identifié", function () {
       it('doit retourner UNAUTHORIZED (401)', async function () {
         // given
-        nock(baseUrl, {
-          reqheaders: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .put('/identite', { nom: 'Dorothy' })
-          .reply(200);
-
         const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
-        const server = await createServer();
         const query = { method: 'PUT', url: '/api/agrement', payload, headers: {} };
+        const server = await createServer();
 
         // when
         const response = await server.inject(query);
@@ -182,18 +174,9 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
         const utilisateur = { identifiant: '1', departement: '59' };
         await knex.table('utilisateur').truncate();
         await knex.table('utilisateur').insert(utilisateur);
-
-        nock(baseUrl, {
-          reqheaders: {
-            'Content-Type': 'application/json',
-          },
-        })
-          .put('/identite', { nom: 'Dorothy' })
-          .reply(200);
-
         const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
-        const server = await createServer();
         const query = { method: 'PUT', url: '/api/agrement', payload, headers: { userId: '2' } };
+        const server = await createServer();
 
         // when
         const response = await server.inject(query);

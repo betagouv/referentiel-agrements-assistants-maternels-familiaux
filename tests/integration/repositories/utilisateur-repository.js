@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { knex } from '../../../src/database/database-client.js';
 import { rechercher } from '../../../src/repositories/utilisateur-repository.js';
 
-describe('Integration | Repository | Utilisateur', function () {
+describe('Intégration | Repository | Utilisateur', function () {
   describe('#rechercher', function () {
     describe('si la personne existe', function () {
       it('doit renvoyer le département', async function () {
