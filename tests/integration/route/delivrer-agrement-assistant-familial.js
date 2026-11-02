@@ -153,5 +153,53 @@ describe(`Integration | Route | Délivrance d'agrément`, function () {
         });
       });
     });
+    describe("Si l'utilisateur n'est pas identifié", function () {
+      it('doit retourner UNAUTHORIZED (401)', async function () {
+        // given
+        nock(baseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Dorothy' })
+          .reply(200);
+
+        const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
+        const server = await createServer();
+        const query = { method: 'PUT', url: '/api/agrement', payload, headers: {} };
+
+        // when
+        const response = await server.inject(query);
+
+        // then
+        expect(response.statusCode).to.equal(StatusCodes.UNAUTHORIZED);
+      });
+    });
+    describe("Si l'utilisateur n'est pas autorisé", function () {
+      it('doit retourner FORBIDDEN (403)', async function () {
+        // given
+        const utilisateur = { identifiant: '1', departement: '59' };
+        await knex.table('utilisateur').truncate();
+        await knex.table('utilisateur').insert(utilisateur);
+
+        nock(baseUrl, {
+          reqheaders: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .put('/identite', { nom: 'Dorothy' })
+          .reply(200);
+
+        const payload = { personne: { nom: 'Dorothy' }, agrement: { dateDelivrance: '2003-01-01' } };
+        const server = await createServer();
+        const query = { method: 'PUT', url: '/api/agrement', payload, headers: { userId: '2' } };
+
+        // when
+        const response = await server.inject(query);
+
+        // then
+        expect(response.statusCode).to.equal(StatusCodes.FORBIDDEN);
+      });
+    });
   });
 });
