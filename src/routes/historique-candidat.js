@@ -23,7 +23,7 @@ const route = {
     const nom = request.payload.nom;
 
     if (nom === 'John') {
-      await traceRepository.persister();
+      await traceRepository.persister({});
     }
 
     const laPersonneNExistePas = !(await identiteRepository.existe({ nom }));
