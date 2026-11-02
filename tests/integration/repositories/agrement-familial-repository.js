@@ -8,8 +8,8 @@ describe('Integration | Repository | agrément', function () {
     describe("si l'agrément n'existe pas", function () {
       it('doit le persister', async function () {
         // given
-        const agrement = { nom: 'Dorothy', dateDeDelivrance: new Date('2003-01-01Z') };
         await knex.table('agrement').truncate();
+        const agrement = { nom: 'Dorothy', dateDeDelivrance: new Date('2003-01-01Z'), departementDeDelivrance: '59' };
 
         // when
         await persister(agrement);
