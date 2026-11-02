@@ -4,7 +4,7 @@ const rechercher = async ({ nom }) => {
   const row = await knex
     .withSchema('pajemploi')
     .select('dateDeDelivrance', 'departementDeDelivrance')
-    .table('agrement')
+    .from('agrement')
     .where({ nom });
   return row;
 };

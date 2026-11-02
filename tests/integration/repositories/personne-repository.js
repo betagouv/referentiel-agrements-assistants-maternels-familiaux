@@ -13,7 +13,7 @@ describe('Intégration | Repository | personne', function () {
 
         // when
         await persister(personne);
-        const result = await knex.table('personne').where({ nom: 'Dorothy' });
+        const result = await knex.select().from('personne').where({ nom: 'Dorothy' });
 
         // then
         expect(result.length).to.equal(1);

@@ -78,3 +78,39 @@ describe(`Intégration | Route | Délivrance d'agrément`, function () {
   
 })
 ```
+
+### Query-builder
+
+La libraire utilisée est [knex](https://knexjs.org/guide/query-builder.html).
+
+Pour éviter les injections SQL : 
+- utiliser le mode SQL brut `raw($QUERY` en dernier recours (ex : l'opérateur n'existe pas);
+- ne pas utiliser d'interpolation manuelle.
+
+Voilà une utilisation justifiée : il n'est pas possible de modifier un type de colonne existante avec knex. 
+```js
+await knex.raw(`alter table agrement alter "dateDeDelivrance" TYPE TIMESTAMP WITH TIME ZONE`);
+```
+
+Pour faciliter la lecture des `SELECT`, utiliser les mots-clef proche du SQL.
+```js
+// préférer
+await knex.select('departement').from('utilisateur').where({ identifiant });
+// plutôt que
+await knex('utilisateur').select('departement').where({ identifiant });
+```
+
+Pour éviter les tests fragiles, sélectionner toujours explicitement dans l'implémentation les colonnes à renvoyer.
+```js
+// préférer
+await knex.select('departement').from('utilisateur').where({ identifiant });
+// plutôt que
+await knex.select().from('utilisateur').where({ identifiant });
+```
+
+Par contre, dans le code de test de persistence, on peut avoir besoin de vérifier l'intégralité des champs.
+```js
+const result = await knex.select().from('trace');
+expect(result.length).to.equal(1);
+expect(result[0]).to.deep.equal({ utilisateur: '1', nom: 'Jack' });
+```

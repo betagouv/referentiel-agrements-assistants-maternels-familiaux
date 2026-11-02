@@ -13,7 +13,7 @@ describe("Intégration | Repository | Agrément d'assistant familial", function 
 
         // when
         await persister(agrement);
-        const result = await knex.table('agrement').where({ nom: 'Dorothy' });
+        const result = await knex.select().from('agrement').where({ nom: 'Dorothy' });
 
         // then
         expect(result.length).to.equal(1);

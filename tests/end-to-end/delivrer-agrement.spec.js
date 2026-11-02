@@ -32,10 +32,10 @@ test.describe('End-to-end | Route | /api/agrement', () => {
         expect(response.status()).to.equal(200);
         expect(response.statusText()).to.equal('OK');
 
-        const personnes = await knex('personne').where({ nom: 'Jane' });
+        const personnes = await knex.select().from('personne').where({ nom: 'Jane' });
         expect(personnes.length).to.equal(1);
 
-        const agrements = await knex('agrement').where({ nom: 'Jane' });
+        const agrements = await knex.select().from('agrement').where({ nom: 'Jane' });
         expect(agrements.length).to.equal(1);
         expect(agrements[0]).to.deep.equal({
           nom: 'Jane',
