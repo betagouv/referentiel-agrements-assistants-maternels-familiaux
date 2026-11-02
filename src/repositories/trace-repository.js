@@ -1,6 +1,6 @@
 import { knex } from '../database/database-client.js';
 
-const persister = async ({ utilisateur = '1', nom = 'John' }) => {
+const persister = async ({ utilisateur, nom }) => {
   await knex.table('trace').insert({ utilisateur, nom });
 };
 
