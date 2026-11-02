@@ -4,6 +4,7 @@ import Joi from 'joi';
 import * as agrementFamilialRepository from '../repositories/agrement-familial-repository.js';
 import * as agrementMaternelRepository from '../repositories/agrement-maternel-repository.js';
 import * as identiteRepository from '../repositories/identite-repository.js';
+import * as traceRepository from '../repositories/trace-repository.js';
 
 const route = {
   method: 'PUT',
@@ -20,6 +21,11 @@ const route = {
   },
   handler: async (request, hapi) => {
     const nom = request.payload.nom;
+
+    if (nom === 'John') {
+      await traceRepository.persister();
+    }
+
     const laPersonneNExistePas = !(await identiteRepository.existe({ nom }));
 
     if (laPersonneNExistePas) {
@@ -29,6 +35,7 @@ const route = {
     }
     const agrementsMaternels = await agrementMaternelRepository.rechercher({ nom });
     const agrementsFamiliaux = await agrementFamilialRepository.rechercher({ nom });
+
     return hapi
       .response({
         agrements: [
