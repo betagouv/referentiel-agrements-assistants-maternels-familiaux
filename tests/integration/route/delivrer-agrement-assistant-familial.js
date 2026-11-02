@@ -54,7 +54,7 @@ describe(`Intégration | Route | Délivrance d'agrément`, function () {
 
             // when
             await server.inject(query);
-            const actual = await knex('personne').where({ nom: 'Dorothy' });
+            const actual = await knex.select().from('personne').where({ nom: 'Dorothy' });
 
             // then
             expect(actual.length).to.equal(1);
@@ -76,7 +76,7 @@ describe(`Intégration | Route | Délivrance d'agrément`, function () {
 
             // when
             await server.inject(query);
-            const agrement = await knex('agrement').where({ nom: 'Dorothy' }).first();
+            const agrement = await knex.select().from('agrement').where({ nom: 'Dorothy' }).first();
 
             // then
             expect(agrement).to.deep.equal({
@@ -124,7 +124,7 @@ describe(`Intégration | Route | Délivrance d'agrément`, function () {
 
             // when
             await server.inject(query);
-            const actual = await knex('personne').where({ nom: 'Dorothy' });
+            const actual = await knex.select().from('personne').where({ nom: 'Dorothy' });
 
             // then
             expect(actual.length).to.equal(0);
@@ -146,7 +146,7 @@ describe(`Intégration | Route | Délivrance d'agrément`, function () {
 
             // when
             await server.inject(query);
-            const actual = await knex('agrement').where({ nom: 'Dorothy' });
+            const actual = await knex.select().from('agrement').where({ nom: 'Dorothy' });
 
             // then
             expect(actual.length).to.equal(0);
