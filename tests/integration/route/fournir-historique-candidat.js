@@ -36,7 +36,7 @@ describe(`Intégration | Route | Historique du candidat`, function () {
           .put('/identite', { nom: 'John' })
           .reply(StatusCodes.NOT_FOUND);
         await knex.table('trace').truncate();
-        const payload = { nom: 'John' };
+        const payload = { nom: 'Jack' };
         const query = { method: 'PUT', url: '/api/historique-candidat', payload, headers };
         const server = await createServer();
 
@@ -45,7 +45,7 @@ describe(`Intégration | Route | Historique du candidat`, function () {
 
         // then
         const actual = await knex.select().from('trace').first();
-        expect(actual).to.deep.equal({ utilisateur: '1', nom: 'John' });
+        expect(actual).to.deep.equal({ utilisateur: '1', nom: 'Jack' });
       });
       describe("Si l'identité du candidat n'est pas connue", function () {
         it('doit retourner BAD_REQUEST (400)', async function () {
