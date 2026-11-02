@@ -137,7 +137,11 @@ describe(`Integration | Route | Historique du candidat`, function () {
           .reply(200, { agrements: [] });
         await knex.table('agrement').truncate();
         await knex.table('personne').truncate();
-        const agrement = { nom: 'Dorothy', dateDeDelivrance: new Date('2003-01-01T01:00:00.123+01:00') };
+        const agrement = {
+          nom: 'Dorothy',
+          dateDeDelivrance: new Date('2003-01-01T01:00:00.123+01:00'),
+          departementDeDelivrance: '59',
+        };
         await knex.table('agrement').insert(agrement);
         const payload = { nom: 'Dorothy' };
         const server = await createServer();
@@ -149,7 +153,9 @@ describe(`Integration | Route | Historique du candidat`, function () {
         // then
         const actual = JSON.parse(response.payload);
         expect(actual).to.deep.equal({
-          agrements: [{ type: 'familial', dateDeDelivrance: '2003-01-01T00:00:00.123Z' }],
+          agrements: [
+            { type: 'familial', dateDeDelivrance: '2003-01-01T00:00:00.123Z', departementDeDelivrance: '59' },
+          ],
         });
       });
     });
