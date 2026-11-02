@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { knex } from '../../../src/database/database-client.js';
 import { persister, rechercher } from '../../../src/repositories/agrement-familial-repository.js';
 
-describe('Integration | Repository | agrément', function () {
+describe("Integration | Repository | Agrément d'assistant familial", function () {
   describe('#persister', function () {
     describe("si l'agrément n'existe pas", function () {
       it('doit le persister', async function () {
@@ -31,7 +31,7 @@ describe('Integration | Repository | agrément', function () {
       it('doit le renvoyer', async function () {
         // given
         await knex.table('agrement').truncate();
-        const agrement = { nom: 'Dorothy', dateDeDelivrance: new Date('2003-01-01Z') };
+        const agrement = { nom: 'Dorothy', dateDeDelivrance: new Date('2003-01-01Z'), departementDeDelivrance: '59' };
         await knex.table('agrement').insert(agrement);
 
         // when
@@ -39,7 +39,11 @@ describe('Integration | Repository | agrément', function () {
 
         // then
         expect(result.length).to.equal(1);
-        expect(result[0]).to.deep.equal({ nom: 'Dorothy', dateDeDelivrance: new Date('2003-01-01Z') });
+        expect(result[0]).to.deep.equal({
+          nom: 'Dorothy',
+          dateDeDelivrance: new Date('2003-01-01Z'),
+          departementDeDelivrance: '59',
+        });
       });
     });
     describe("si l'agrément n'existe pas ", function () {

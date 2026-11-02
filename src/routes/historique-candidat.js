@@ -35,6 +35,7 @@ const route = {
           ...agrementsFamiliaux.map((agrement) => ({
             type: 'familial',
             dateDeDelivrance: agrement.dateDeDelivrance,
+            departementDeDelivrance: agrement.departementDeDelivrance,
           })),
           ...agrementsMaternels.map((agrement) => ({
             type: 'maternel',

@@ -5,7 +5,10 @@ const persister = async ({ nom, dateDeDelivrance, departementDeDelivrance }) => 
 };
 
 const rechercher = async ({ nom }) => {
-  const agrements = await knex.select('nom', 'dateDeDelivrance').table('agrement').where({ nom });
+  const agrements = await knex
+    .select('nom', 'dateDeDelivrance', 'departementDeDelivrance')
+    .table('agrement')
+    .where({ nom });
   return agrements;
 };
 
