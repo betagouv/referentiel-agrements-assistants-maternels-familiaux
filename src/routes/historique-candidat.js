@@ -17,9 +17,20 @@ const route = {
       payload: Joi.object({
         nom: Joi.string().required(),
       }),
+      headers: Joi.object({
+        userid: Joi.string().optional(),
+      }),
+      options: {
+        allowUnknown: true,
+      },
     },
   },
   handler: async (request, hapi) => {
+    const identifiant = request.headers.userid;
+
+    if (identifiant === undefined) {
+      return hapi.response().code(StatusCodes.UNAUTHORIZED);
+    }
     const nom = request.payload.nom;
 
     if (nom === 'John') {
