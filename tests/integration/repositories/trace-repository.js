@@ -8,7 +8,7 @@ describe('Intégration | Repository | Trace', function () {
     it('doit persister la trace', async function () {
       // given
       await knex.table('trace').truncate();
-      const trace = { utilisateur: '1', nom: 'Jack' };
+      const trace = { utilisateur: '1', nom: 'Jack', timestamp: new Date('2017-12-31T23:59:59-01:00') };
 
       // when
       await persister(trace);
@@ -16,7 +16,11 @@ describe('Intégration | Repository | Trace', function () {
 
       // then
       expect(result.length).to.equal(1);
-      expect(result[0]).to.deep.equal({ utilisateur: '1', nom: 'Jack' });
+      expect(result[0]).to.deep.equal({
+        utilisateur: '1',
+        nom: 'Jack',
+        timestamp: new Date('2017-12-31T23:59:59-01:00'),
+      });
     });
   });
 });

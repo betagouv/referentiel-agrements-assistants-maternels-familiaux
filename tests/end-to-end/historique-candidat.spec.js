@@ -1,5 +1,7 @@
 import { test } from '@playwright/test';
-import { expect } from 'chai';
+import { expect, use } from 'chai';
+import chaiExclude from 'chai-exclude';
+use(chaiExclude);
 import { StatusCodes } from 'http-status-codes';
 
 import { knex } from '../../src/database/database-client.js';
@@ -50,7 +52,7 @@ test.describe('End-to-end | Route | /api/historique-candidat', () => {
           // then
           const traces = await knex.select().from('trace');
           expect(traces.length).to.equal(1);
-          expect(traces[0]).to.deep.equal({ utilisateur: '1', nom: 'Dorothy' });
+          expect(traces[0]).excluding('timestamp').to.deep.equal({ utilisateur: '1', nom: 'Dorothy' });
         });
       });
     });

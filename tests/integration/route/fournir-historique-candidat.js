@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { StatusCodes } from 'http-status-codes';
 import nock from 'nock';
+import sinon from 'sinon';
 
 import { configuration } from '../../../src/configuration.js';
 import { knex } from '../../../src/database/database-client.js';
@@ -26,8 +27,18 @@ describe(`Intégration | Route | Historique du candidat`, function () {
     describe("Si l'utilisateur est identifié", function () {
       const utilisateur = { identifiant: '1', departement: '62' };
       const headers = { userId: utilisateur.identifiant };
+      let clock;
+      beforeEach(function () {
+        // https://github.com/knex/knex/issues/1267#issuecomment-545412240
+        clock = sinon.useFakeTimers({ now: new Date('2017-12-31T23:59:59-01:00'), toFake: ['Date'] });
+      });
+
+      afterEach(function () {
+        clock.restore();
+      });
       it('doit tracer la consultation ', async function () {
         // given
+
         nock(rnippBaseUrl, {
           reqheaders: {
             'Content-Type': 'application/json',
@@ -45,7 +56,11 @@ describe(`Intégration | Route | Historique du candidat`, function () {
 
         // then
         const actual = await knex.select().from('trace').first();
-        expect(actual).to.deep.equal({ utilisateur: '1', nom: 'Jack' });
+        expect(actual).to.deep.equal({
+          utilisateur: '1',
+          nom: 'Jack',
+          timestamp: new Date('2017-12-31T23:59:59-01:00'),
+        });
       });
       describe("Si l'identité du candidat n'est pas connue", function () {
         it('doit retourner BAD_REQUEST (400)', async function () {
