@@ -1,0 +1,11 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":prHourlyLimitNone"],
+  "prConcurrentLimit": 5,
+  "labels": ["dépendances"],
+  "minimumReleaseAge": "7 days",
+  "branchNameStrict": true,
+  "branchPrefix": "mise-jour-dependances-",
+  "commitMessagePrefix": "tech(api): ",
+  "rebaseWhen": "auto"
+}
