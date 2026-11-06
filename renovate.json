@@ -7,5 +7,14 @@
   "branchNameStrict": true,
   "branchPrefix": "mise-jour-dependances-",
   "commitMessagePrefix": "tech(api): ",
-  "rebaseWhen": "auto"
+  "rebaseWhen": "auto",
+  "packageRules": [
+    {
+      "description": "Automerge all dev dependencies updates",
+      "groupName": "devDependencies",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "automerge": true
+    }
+  ]
 }
