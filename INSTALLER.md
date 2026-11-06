@@ -166,13 +166,22 @@ docker compose down --volumes
 
 ## Tester sur Github
 
-Configurée automatiquement par le fichier [dédié](.github/workflows/test.yml).
+Les tests automatisés sont :
+- déclenchés automatiquement à chaque création de pull request ; 
+- à chaque merge sur la branche par défaut.
 
-Créez un environnement `main`.
+Pour plus de détails, voir [l'action](.github/workflows/test.yml)
+
+Pour cela, créez un environnement `main`.
 
 Ajoutez-y les variables d'environnement :
 - de l'API, voir [.envrc](.envrc.sample);
 - des fakes, voir [.envrc](.envrc.sample).
+
+Déclenchez manuellement [l'action](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/actions).
+
+Cochez l'option `Require merge queue` et `Require status checks to pass`.
+
 
 ## Déployer sur Scalingo
 
