@@ -182,6 +182,8 @@ Déclenchez manuellement [l'action](https://github.com/betagouv/referentiel-agre
 
 Cochez l'option `Require merge queue` et `Require status checks to pass`.
 
+Vérifiez que la merge queue [a été créée](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/queue/main). 
+
 
 ## Déployer sur Scalingo
 
@@ -231,4 +233,9 @@ curl -i "http://localhost:3000/api/error"
 
 ## Mettre à jour automatiquement les dépendances
 
-Installer l'application Renovate sur Github, elle lira la [configuration dédiée](renovate.json).
+Installer l'application Renovate sur GitHub.
+
+La [configuration dédiée](renovate.json):
+- affiche le [dependency dashboard](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/issues/28) ;
+- groupe toutes les montées de version des dépendances de développement, et les merge (si la CI passe) ;
+- groupe toutes les montées de version non-majeures des dépendances, et les merge (si la CI passe).

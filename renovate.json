@@ -11,9 +11,16 @@
   "packageRules": [
     {
       "description": "Automerge all dev dependencies updates",
-      "groupName": "devDependencies",
+      "groupName": "allDevDependencies",
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["major", "minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Automerge all non-major dependencies updates",
+      "groupName": "nonMajorDependencies",
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
   ]
