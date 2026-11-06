@@ -219,3 +219,7 @@ Pour tester, appeler la route non authentifiée `/api/error`.
 ```shell
 curl -i "http://localhost:3000/api/error"
 ```
+
+## Mettre à jour automatiquement les dépendances
+
+Installer l'application Renovate sur Github, elle lira la [configuration dédiée](renovate.json).
