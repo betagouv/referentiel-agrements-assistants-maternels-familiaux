@@ -1,5 +1,11 @@
 # Contribuer
 
+## Workflow
+
+Chaque modification doit suivre ces étapes.
+
+### Branche
+
 Chaque modification est effectuée sur une branche :
 - partant de la branche par défaut du repository;
 - son nom est en français;
@@ -8,24 +14,46 @@ Chaque modification est effectuée sur une branche :
 
 Ex: `tracer-consultation-historique-agrement`.
 
+Les branches de mises à jour de dépendances sont, elles, préfixées par `mise-jour-dependances-`.
+
+### Commits
+
 Sur une branche, la modification est effectuée : 
 - avec des commits atomiques ;
 - dont le nom respecte la convention [conventional commit](https://www.conventionalcommits.org).
 
-Ex: `feat(api): lier l'utilisateur à un département`.
+Les types autorisés sont les suivants :
+- `feat` pour l'ajout d'une fonctionnalité ;
+- `fix` pour la correction d'un défaut dans une fonctionnalité (aka. bug) ;
+- `docs` pour la documentation dédiée (ex: markdown);
+- `tech` pour le reste.
 
-La modification est testée automatiquement.
+Exemple sur l'ajout d'une fonctionnalité sur le scope `api` : `feat(api): lier l'utilisateur à un département`.
 
-Elle est soumise par une Pull request, rédigée en français, [en suivant le template](./.github/pull_request_template.md).
+Des tests automatisés doivent couvrir entièrement la modification.
+
+### Revue de code
+
+La modification est soumise par une Pull request, rédigée en français, [en suivant le template](./.github/pull_request_template.md).
 
 La Pull request exécute automatiquement les tests automatisés (CI) avec Github Actions.
 
-La Pull request donne lieu à la création d'une review application.
 Chaque push sur la pull request redéploie les modifications, uniquement si la CI finit en succès.
+
+### Test de déploiement et test manuel
+
+La Pull request donne lieu à la création d'une review application.
+
+Cela permet :
+- de tester le déploiement, notamment les mises à jour de schéma ;
+- de tester manuellement, au moins le cas passant.
+
+### Intégration
 
 L'intégration des modifications (merge de la Pull Request) :
 - a pour pré-requis le passage des tests automatisés avec succès ;
-- préserve les commits (no squash).
+- préserve les commits (no squash) ;
+- déploie sur l'environnement de référence.
 
 ## Backend
 
