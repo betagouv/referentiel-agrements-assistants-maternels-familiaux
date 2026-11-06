@@ -3,7 +3,13 @@ name: test
 permissions:
   contents: read
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
 
 env:
   # https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#example-usage-of-the-vars-context
