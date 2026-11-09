@@ -187,6 +187,12 @@ Vérifiez que la merge queue [a été créée](https://github.com/betagouv/refer
 
 ## Déployer sur Scalingo
 
+Une fois configuré, le déploiement sur Scalingo se fait :
+- lors de la création d'une pull request, sur la review application ;
+- lors du merge d'une pull request sur `main`, sur l'environnement de référence.
+
+Le déploiement sur Scalingo se fait uniquement si la CI s'achève avec succès.
+
 ### Application
 
 Activez l'intégration SCM.

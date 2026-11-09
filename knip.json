@@ -1,4 +1,4 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignoreFiles": ["src/database/**"]
+  "ignoreFiles": ["src/database/**", "tooling/database-client/knexfile.js"]
 }

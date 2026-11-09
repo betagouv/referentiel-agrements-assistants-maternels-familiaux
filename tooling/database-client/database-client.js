@@ -1,6 +1,6 @@
 import Knex from 'knex';
 
-import { configuration } from '../configuration.js';
+import { configuration } from '../../src/configuration.js';
 
 const knex = Knex({
   client: 'pg',
