@@ -1,4 +1,4 @@
-import { knex } from '../../../tooling/database-client.js';
+import { knex } from '../../../../tooling/database-client.js';
 
 const seed = async () => {
   await knex.table('utilisateur').truncate();
