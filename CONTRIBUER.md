@@ -34,7 +34,15 @@ Des tests automatisés doivent couvrir entièrement la modification.
 
 ### Revue de code
 
-La modification est soumise par une Pull request, rédigée en français, [en suivant le template](./.github/pull_request_template.md).
+La modification est soumise par une Pull request.
+
+Elle est rédigée en français, [en suivant le template](./.github/pull_request_template.md).
+
+Son titre commence par :
+- [FEAT] si une fonctionnalité est ajoutée ; 
+- [FIX] si un défaut est corrigé ;
+- [DOC] si uniquement la documentation est concernée ;
+- [TECH] pour le reste.
 
 La Pull request exécute automatiquement les tests automatisés (CI) avec Github Actions.
 

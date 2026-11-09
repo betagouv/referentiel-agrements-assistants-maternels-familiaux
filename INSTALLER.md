@@ -203,6 +203,8 @@ Ajouter un addon PostgreSQL.
 
 Effectuez un premier déploiement.
 
+Les [migrations de la base de données](src/database/main/migrations) sont exécutées automatiquement par le hook de [postdeploy](package.json) lors du déploiement.
+
 ### Review application
 
 Activez les review application.
@@ -219,7 +221,7 @@ L'ajout de l'addon PostgreSQL est effectué automatiquement grâce au fichier [d
 
 [Référence](https://doc.scalingo.com/platform/app/review-apps#addons-collaborators-and-environment-variables)
 
-Le schéma de la base de données est [créé automatiquement](src/database/migrations) (migrations), ainsi que des [jeux de test manuels](src/database/seeds) (seeds).
+Les [jeux de test manuels](src/database/seeds) (seeds) sont créés [automatiquement](scalingo.json) lors du premier déploiement.
 
 Pour tester des montées et descentes de migrations, connectez-vous en CLI. 
 ```shell
