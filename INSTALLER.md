@@ -156,7 +156,6 @@ Pour les fakes.
 npx knex --cwd ./tests/fake/database migrate:make $NOM_MIGRATION
 ```
 
-
 ### Supprimer le schéma
 
 Pour supprimer les tables et les données de test.
@@ -164,13 +163,32 @@ Pour supprimer les tables et les données de test.
 docker compose down --volumes
 ```
 
-## Tester sur Github
+## Intégrer sur Github
 
-Les tests automatisés sont :
-- déclenchés automatiquement à chaque création de pull request ; 
+La configuration Github recommandée utilise les merge commit, bien que ce soit optionnel.
+Par contre, la merge queue est obligatoire pour la mise à jour avec Renovate, afin de profiter de l'auto-merge.
+
+### Configurer merge
+
+Créez une ruleset sur la branche par défaut.
+
+Décocher l'option `Require linear history`.
+
+Cochez l'option `Require merge queue`.
+Sélectionnez l'option `Merge commit`.
+Cochez l'option `Require all queue entries to pass required checks`.
+
+Cochez l'option `Require status checks to pass` et `Require branches to be up to date before merging`.
+
+Cochez l'option `Require a pull request before merging`.
+
+Vérifiez que la merge queue [a été créée](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/queue/main).
+
+### Tests automatisés
+
+Les tests automatisés sont déclenchés :
+- à chaque création de pull request ; 
 - à chaque merge sur la branche par défaut.
-
-Pour plus de détails, voir [l'action](.github/workflows/test.yml)
 
 Pour cela, créez un environnement `main`.
 
@@ -178,12 +196,9 @@ Ajoutez-y les variables d'environnement :
 - de l'API, voir [.envrc](.envrc.sample);
 - des fakes, voir [.envrc](.envrc.sample).
 
-Déclenchez manuellement [l'action](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/actions).
+Déclenchez manuellement [l'action](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/actions) et vérifiez qu'elle sorte en succès.
 
-Cochez l'option `Require merge queue` et `Require status checks to pass`.
-
-Vérifiez que la merge queue [a été créée](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/queue/main). 
-
+Pour plus de détails, voir [l'action](.github/workflows/test.yml)
 
 ## Déployer sur Scalingo
 
