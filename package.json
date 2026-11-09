@@ -20,6 +20,7 @@
     "lint:files:js:fix": "eslint --fix .",
     "lint:filenames": "ls-lint",
     "lint:dependencies": "knip --no-progress",
+    "postdeploy": "npm run database:status && DEBUG=knex:query npm run database:migrate",
     "start": "node --import ./instrument.cjs --no-warnings=ExperimentalWarning serve.js",
     "test": "mocha",
     "test:end-to-end": "playwright test"
