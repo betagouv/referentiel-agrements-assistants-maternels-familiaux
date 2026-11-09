@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { rechercher } from '../../../src/repositories/utilisateur-repository.js';
-import { knex } from '../../../tooling/database-client/database-client.js';
+import { knex } from '../../../tooling/database-client.js';
 
 describe('Intégration | Repository | Utilisateur', function () {
   describe('#rechercher', function () {

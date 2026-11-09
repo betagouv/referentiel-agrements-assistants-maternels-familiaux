@@ -4,7 +4,7 @@ import chaiExclude from 'chai-exclude';
 use(chaiExclude);
 import { StatusCodes } from 'http-status-codes';
 
-import { knex } from '../../tooling/database-client/database-client.js';
+import { knex } from '../../tooling/database-client.js';
 
 test.describe('End-to-end | Route | /api/historique-candidat', () => {
   test.describe.configure({ retries: 3 });

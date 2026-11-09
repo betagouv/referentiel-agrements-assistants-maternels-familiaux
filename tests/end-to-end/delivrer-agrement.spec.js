@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { expect } from 'chai';
 
-import { knex } from '../../tooling/database-client/database-client.js';
+import { knex } from '../../tooling/database-client.js';
 
 test.describe('End-to-end | Route | /api/agrement', () => {
   test.describe("quand l'utilisateur est authentifié et autorisé", () => {

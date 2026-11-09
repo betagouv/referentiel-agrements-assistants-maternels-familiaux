@@ -5,7 +5,7 @@ import sinon from 'sinon';
 
 import { configuration } from '../../../src/configuration.js';
 import { createServer } from '../../../src/server.js';
-import { knex } from '../../../tooling/database-client/database-client.js';
+import { knex } from '../../../tooling/database-client.js';
 describe(`Intégration | Route | Historique du candidat`, function () {
   const pajemploiBaseUrl = configuration.dependencies.pajemploi.baseUrl;
   const rnippBaseUrl = configuration.dependencies.rnipp.baseUrl;
