@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import { knex } from '../../../src/database/database-client.js';
 import { persister, rechercher } from '../../../src/repositories/agrement-familial-repository.js';
+import { knex } from '../../../tooling/database-client/database-client.js';
 
 describe("Intégration | Repository | Agrément d'assistant familial", function () {
   describe('#persister', function () {
