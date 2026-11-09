@@ -18,11 +18,15 @@ if (validationError) {
   throw error;
 }
 
+// https://github.com/vincit/tarn.js#usage
+const defaultPoolConfiguration = { min: 2, max: 10, createTimeoutMillis: 30000, idleTimeoutMillis: 30000 };
+
 const configuration = {
   client: 'pg',
   connection: {
     connectionString: actual.databaseUrl,
   },
+  pool: defaultPoolConfiguration,
 };
 
 const knex = Knex(configuration);
