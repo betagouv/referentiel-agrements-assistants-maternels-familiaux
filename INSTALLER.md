@@ -203,7 +203,7 @@ Ajouter un addon PostgreSQL.
 
 Effectuez un premier déploiement.
 
-Les [migrations de la base de données](src/database/main/migrations) sont exécutées automatiquement par le hook de [postdeploy](package.json) lors du déploiement.
+Les [migrations de la base de données](src/database/main/migrations) sont exécutées automatiquement par le hook de [postdeploy](Procfile) lors du déploiement.
 
 ### Review application
 
