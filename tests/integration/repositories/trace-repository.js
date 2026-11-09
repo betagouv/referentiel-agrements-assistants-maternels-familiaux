@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { persister } from '../../../src/repositories/trace-repository.js';
-import { knex } from '../../../tooling/database-client/database-client.js';
+import { knex } from '../../../tooling/database-client.js';
 
 describe('Intégration | Repository | Trace', function () {
   describe('#persister', function () {

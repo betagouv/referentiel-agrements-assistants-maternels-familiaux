@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import Knex from 'knex';
 
 const expected = Joi.object({
   databaseUrl: Joi.string().uri().required(),
@@ -19,13 +20,11 @@ if (validationError) {
 
 const configuration = {
   client: 'pg',
-  migrations: {
-    directory: './migrations/',
-    tableName: 'knex_migrations',
-  },
   connection: {
     connectionString: actual.databaseUrl,
   },
 };
 
-export default configuration;
+const knex = Knex(configuration);
+
+export { knex };

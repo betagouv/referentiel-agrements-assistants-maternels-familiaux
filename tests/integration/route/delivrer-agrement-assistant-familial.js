@@ -4,7 +4,7 @@ import nock from 'nock';
 
 import { configuration } from '../../../src/configuration.js';
 import { createServer } from '../../../src/server.js';
-import { knex } from '../../../tooling/database-client/database-client.js';
+import { knex } from '../../../tooling/database-client.js';
 describe(`Intégration | Route | Délivrance d'agrément`, function () {
   const baseUrl = configuration.dependencies.rnipp.baseUrl;
   describe('PUT /api/agrement', function () {

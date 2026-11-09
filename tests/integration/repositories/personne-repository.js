@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { persister } from '../../../src/repositories/personne-repository.js';
-import { knex } from '../../../tooling/database-client/database-client.js';
+import { knex } from '../../../tooling/database-client.js';
 
 describe('Intégration | Repository | personne', function () {
   describe('#persister', function () {
