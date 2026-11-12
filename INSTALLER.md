@@ -176,26 +176,55 @@ docker compose down --volumes
 
 ### Intégrer avec Github
 
-La configuration Github recommandée utilise les merge commit, bien que ce soit optionnel.
-Par contre, la merge queue est obligatoire pour la mise à jour avec Renovate, afin de profiter de l'auto-merge.
+Nous proposons ici une configuration Github qui privilégie :
+- la fiabilité du code (pull request obligatoire avec exécution des tests) ;
+- la lisibilité du code (merge commit) ;
+- la facilité de collaboration (auto-merge avec merge queue).
 
-#### Configurer merge
+Vous pouvez faire des choix différents, sauf pour la merge queue, obligatoire pour la mise à jour avec Renovate.
+
+#### Configurer le dépôt de code
+
+##### Activer les pull request
+
+Allez dans [la configuration](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/settings).
+
+Définissez la branche par défaut.
+
+Activez :
+- les Pull request;
+- les issues (pour Renovate).
+
+Dans `Pull requests`
+- cochez `Allow merge commit` ;
+- décochez `Allow squash merging` ;
+- décochez `Allow rebase merging` ;
+- cochez `Allow auto-merge ` ;
+- cochez `Automatically delete head branches `.
+
+##### Créer une ruleset
 
 Créez une ruleset sur la branche par défaut.
 
+Cochez l'option `Restrict deletions`.
+
 Décocher l'option `Require linear history`.
 
-Cochez l'option `Require merge queue`.
-Sélectionnez l'option `Merge commit`.
-Cochez l'option `Require all queue entries to pass required checks`.
+Cochez l'option `Require merge queue` :
+- merge method : `Merge commit`;
+- option activée : `Require all queue entries to pass required checks`.
 
-Cochez l'option `Require status checks to pass` et `Require branches to be up to date before merging`.
+Cochez l'option `Require a pull request before merging`:
+- merge method : `Merge`.
 
-Cochez l'option `Require a pull request before merging`.
+Cochez l'option `Require status checks to pass`.
+- option activée : `Require branches to be up to date before merging`.
+
+Sauvegardez la ruleset.
 
 Vérifiez que la merge queue [a été créée](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/queue/main).
 
-#### Tests automatisés
+#### Configurer les tests automatisés
 
 Les tests automatisés sont déclenchés :
 - à chaque création de pull request ; 
@@ -211,6 +240,18 @@ Déclenchez manuellement [l'action](https://github.com/betagouv/referentiel-agre
 
 Pour plus de détails, voir [l'action](.github/workflows/test.yml)
 
+#### Configurer Renovate
+
+Installer l'application Renovate sur GitHub.
+
+Vérifiez qu'un [dependency dashboard](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/issues/28) est créé.
+
+La [configuration dédiée](renovate.json) crée tous les jours :
+- une PR contenant toutes les montées de version des dépendances de développement,
+- une PR contenant toutes les montées de version non-majeures des dépendances.
+
+Si les vérifications habituelles passent (CI et déploiement), la PR est mergée automatiquement.
+
 ### Déployer avec Scalingo
 
 Une fois configuré, le déploiement sur Scalingo se fait :
@@ -221,11 +262,20 @@ Le déploiement sur Scalingo se fait uniquement si la CI s'achève avec succès.
 
 #### Application
 
-Activez l'intégration SCM.
+Créez une application.
+
+Activez l'intégration SCM sur le repository Github, branche par défaut.
 
 Ajoutez les variables d'environnement, voir [.envrc](.envrc.sample).
 
 Ajouter un addon PostgreSQL.
+
+Pour tester la connexion à la BDD, connectez-vous en CLI.
+```shell
+scalingo --app $NOM_APPLICATION-pr$NUMERO_PULL_REQUEST run bash
+dbclient-fetcher psql
+psql $DATABASE_URL
+```
 
 Effectuez un premier déploiement.
 
@@ -235,7 +285,8 @@ Les [migrations de la base de données](src/database/main/migrations) sont exéc
 
 Activez les review application.
 
-Elles héritent automatiquement des variables d'environnement.
+Elles héritent automatiquement des variables d'environnement de votre application.
+
 L'ajout de l'addon PostgreSQL est effectué automatiquement grâce au fichier [dédié](scalingo.json).
 
 > Child applications clone some information from the parent app:
@@ -247,7 +298,7 @@ L'ajout de l'addon PostgreSQL est effectué automatiquement grâce au fichier [d
 
 [Référence](https://doc.scalingo.com/platform/app/review-apps#addons-collaborators-and-environment-variables)
 
-Les [jeux de test manuels](src/database/seeds) (seeds) sont créés [automatiquement](scalingo.json) lors du premier déploiement.
+Les [jeux de test manuels](src/database/seeds) de l'API (seeds) sont créés [automatiquement](scalingo.json) lors du premier déploiement.
 
 Pour tester des montées et descentes de migrations, connectez-vous en CLI. 
 ```shell
@@ -264,12 +315,3 @@ Pour tester, appeler la route non authentifiée `/api/error`.
 ```shell
 curl -i "http://localhost:3000/api/error"
 ```
-
-### Mettre à jour avec Renovate
-
-Installer l'application Renovate sur GitHub.
-
-La [configuration dédiée](renovate.json):
-- affiche le [dependency dashboard](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/issues/28) ;
-- groupe toutes les montées de version des dépendances de développement, et les merge (si la CI passe) ;
-- groupe toutes les montées de version non-majeures des dépendances, et les merge (si la CI passe).
