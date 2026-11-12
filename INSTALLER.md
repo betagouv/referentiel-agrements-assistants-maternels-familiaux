@@ -240,17 +240,21 @@ Déclenchez manuellement [l'action](https://github.com/betagouv/referentiel-agre
 
 Pour plus de détails, voir [l'action](.github/workflows/test.yml)
 
-#### Configurer Renovate
+#### Configurer la mise à jour des dépendances
 
 Installer l'application Renovate sur GitHub.
 
 Vérifiez qu'un [dependency dashboard](https://github.com/betagouv/referentiel-agrements-assistants-maternels-familiaux/issues/28) est créé.
 
-La [configuration dédiée](renovate.json) crée tous les jours :
+La [configuration dédiée](renovate.json) crée tous les jours, à 5 heures du matin (Paris) :
 - une PR contenant toutes les montées de version des dépendances de développement,
 - une PR contenant toutes les montées de version non-majeures des dépendances.
 
 Si les vérifications habituelles passent (CI et déploiement), la PR est mergée automatiquement.
+
+Seules les versions publiées il y a au moins 7 jours sont éligibles.
+
+Si vous souhaitez créer une montée de version sans attendre, vous pouvez le faire depuis le dependency dashboard.
 
 ### Déployer avec Scalingo
 
