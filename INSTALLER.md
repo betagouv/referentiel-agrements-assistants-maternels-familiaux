@@ -51,6 +51,7 @@ docker compose up --detach --wait
 Créer le schéma.
 ```shell
 npm run database:migrate
+npm run database:archive:migrate
 ```
 
 Démarrer l'application.
@@ -157,7 +158,12 @@ Dans l'environnement d'exécution Mocha, ajouter l'option `--exit`, présente da
 
 Pour l'application.
 ```shell
-npx knex --cwd ./src/database migrate:make $NOM_MIGRATION
+npx knex --cwd ./src/database/main migrate:make $NOM_MIGRATION
+```
+
+Pour l'archivage.
+```shell
+npx knex --cwd ./src/database/archive migrate:make $NOM_MIGRATION
 ```
 
 Pour les fakes.

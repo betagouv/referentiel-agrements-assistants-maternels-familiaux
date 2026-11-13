@@ -8,7 +8,12 @@ export API_LISTENING_PORT=3000
 # Database
 # =========
 
-export DATABASE_URL=postgresql://postgres:password@localhost
+# Database URL format is
+# postgresql://$USER:$PASSWORD@$HOST:$PORT/$DATABASE_NAME
+
+export DATABASE_URL=postgresql://postgres:password@localhost/postgres
+
+export DATABASE_ARCHIVE_URL=postgresql://postgres:password@localhost/archive
 
 # =========
 # Dependencies
