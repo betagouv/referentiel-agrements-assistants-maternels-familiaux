@@ -21,6 +21,7 @@ env:
   PAJEMPLOI_BASE_URL: ${{ vars.PAJEMPLOI_BASE_URL }}
   PAJEMPLOI_TIMEOUT_MILLISECONDS: ${{ vars.PAJEMPLOI_TIMEOUT_MILLISECONDS }}
   DATABASE_URL: ${{ vars.DATABASE_URL }}
+  DATABASE_ARCHIVE_URL: ${{ vars.DATABASE_ARCHIVE_URL }}
   # fakes
   FAKE_RNIPP_API_LISTENING_PORT: ${{ vars.FAKE_RNIPP_API_LISTENING_PORT }}
   FAKE_PAJEMPLOI_API_LISTENING_PORT: ${{ vars.FAKE_PAJEMPLOI_API_LISTENING_PORT }}
@@ -55,6 +56,10 @@ jobs:
           database: database
       - name: create database schema
         run: npm run database:migrate
+      - name: create archive database
+        run: psql $DATABASE_URL --command="CREATE DATABASE archive"
+      - name: create archive database schema
+        run: npm run database:archive:migrate
       - name: create fake database schema
         run: npm run fake:database:migrate
       - name: run tests
